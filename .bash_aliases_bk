@@ -1,0 +1,78 @@
+#   _               _              _ _                         _     _    
+#  | |__   __ _ ___| |__      __ _| (_) __ _ ___  ___  ___    | |__ | | __
+#  | '_ \ / _` / __| '_ \    / _` | | |/ _` / __|/ _ \/ __|   | '_ \| |/ /
+# _| |_) | (_| \__ \ | | |  | (_| | | | (_| \__ \  __/\__ \   | |_) |   < 
+#(_)_.__/ \__,_|___/_| |_|___\__,_|_|_|\__,_|___/\___||___/___|_.__/|_|\_\
+#                       |_____|                          |_____|          
+# ---> Requires:
+# git
+# Figlet
+# Ranger
+# Tmux
+# Tree
+# Python
+# Gradle
+
+echo -n " --> bash_aliases_bk"
+export BASH_ALIASES_BK_SOURCED="yes"
+
+alias v='vim'
+alias vi='vim'
+alias rr='cd; clear;'
+alias l='ls'
+alias gs='git status'
+alias ga='git add .'
+alias gcom='git commit'
+alias gbl='git branch'
+alias gb='git symbolic-ref --short HEAD'
+alias gn='git rev-list --count head'
+alias gpb='git push origin $(gb)'
+alias gfiles='git show --pretty="" --name-only' #shows files in last commit 
+alias devs='adb devices'
+alias sl='ls'
+alias klar='clear'
+alias cls='clear'
+alias serve='python -m SimpleHTTPServer 8080'
+alias servephp='php -S 127.0.0.1:8080'
+alias code='open -a /Applications/Visual\ Studio\ Code.app/ .'
+alias chrom='open -a "Google Chrome" index.html'
+alias chromlocal='open -a "Google Chrome" "http://localhost:8080"'
+alias gitrepos='find ~ -name .git -type d -maxdepth 3'
+alias ss='source ~/.bash_profile'
+alias h='history'
+alias gl3_in_prog='git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) `git rev-list --count $(echo %h)` - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all'
+alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
+alias lol="git log --oneline"
+alias host='servephp & chromlocal'
+alias day="date '+%a %d. %b' | figlet"
+alias arp="arp -a"
+alias ip="ifconfig | grep 'inet ' | grep -Fv 127.0.0.1 | awk '{print $2}'"
+alias eb='vi ~/.bash_profile'
+alias gcn='git checkout !:2' #Checkout the newly created branch 
+alias killChrome='kill -9 $(pgrep Chrome)'
+alias tmuxkill='tmux kill-session -t ben_tmux'
+alias r='ranger'
+alias idea='open -a /Applications/IntelliJ\ IDEA\ CE.app/ .'
+alias c='clear'
+alias gcl='git config --list --show-origin'
+alias gd='git diff'
+alias gsl='git stash list'
+alias and='open -a /Applications/Android\ Studio.app/ .'
+alias short='git rev-parse --short HEAD'
+alias grh='git reset --hard'
+alias grhh='git reset --hard && git clean -f && git clean -f -d'
+alias tr1='tree -L 1'
+alias tr2='tree -L 2'
+alias tr3='tree -L 3'
+alias gba="git branch -a"
+alias python="python3"
+alias buildAndRunApp='./gradlew assembleDebug && ./gradlew installDebug && adb shell am start -n packagename/com.package.activty'
+alias links='ls -la | grep "\->"'
+alias :q='exit'
+alias :wq='exit'
+alias origin='git config --get remote.origin.url'
+alias gitme='git config --local user.name kardelio; git config --local user.email kardeliogithub@outlook.com'
+alias ve='vi ~/.vimrc'
+alias help='vi ~/help'
+alias block="echo -e '\xE2\x96\x88'"

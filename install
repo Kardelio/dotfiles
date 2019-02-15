@@ -1,0 +1,86 @@
+# !/bin/bash
+echo "Installing Dot Files"
+echo -e "\033[41m PLEASE NOTE: you need to add i3 VIM keys yourself (in this file) \033[0m"
+# TODO add below as part of script
+# BELOW IS i3 VIM KEYS ...
+#   # change focus
+#   bindsym $mod+h focus left
+#   bindsym $mod+j focus down
+#   bindsym $mod+k focus up
+#   bindsym $mod+l focus right
+#   
+#   # split in horizontal orientation
+#   bindsym $mod+Shift+v split h
+#   
+#   # split in vertical orientation
+#   bindsym $mod+v split v
+
+host=$(hostname)
+#So that profile and rc arent overwritten on my work PC
+if [[ "$host" != PC* ]]; then
+	echo "Not on Work Machine so running full install"
+	ln -sf $(realpath .bashrc) $HOME/.bashrc &> /dev/null && echo ".bashrc Successfully installed" || echo ".bashrc already installed" 
+	ln -sf $(realpath .bash_profile) $HOME/.bash_profile &> /dev/null && echo ".bash_profile Successfully installed" || echo ".bash_profile already installed" 
+fi
+
+ln -sf $(realpath .vimrc) $HOME/.vimrc &> /dev/null && echo ".vimrc Successfully installed" || echo ".vimrc already installed" 
+ln -sf $(realpath .bash_aliases_bk) $HOME/.bash_aliases_bk &> /dev/null && echo ".bash_aliases_bk Successfully installed" || echo ".bash_aliases_bk already installed" 
+ln -sf $(realpath help) $HOME/help &> /dev/null && echo "help Successfully installed" || echo "help already installed" 
+
+if [[ -f $HOME/.profile ]]; then
+	echo ".profile exists so will be linked to bash_profile"
+	cp $HOME/.profile $HOME/.backup_profile
+	ln -sf $(realpath .bash_profile) $HOME/.profile &> /dev/null && echo ".profile Successfully installed" || echo ".profile already installed"
+fi
+
+if [ -f /etc/os-release ]; then
+    # freedesktop.org and systemd
+    . /etc/os-release
+    OS=$NAME
+    VER=$VERSION_ID
+elif type lsb_release >/dev/null 2>&1; then
+    # linuxbase.org
+    OS=$(lsb_release -si)
+    VER=$(lsb_release -sr)
+elif [ -f /etc/lsb-release ]; then
+    # For some versions of Debian/Ubuntu without lsb_release command
+    . /etc/lsb-release
+    OS=$DISTRIB_ID
+    VER=$DISTRIB_RELEASE
+elif [ -f /etc/debian_version ]; then
+    # Older Debian/Ubuntu/etc.
+    OS=Debian
+    VER=$(cat /etc/debian_version)
+elif [ -f /etc/SuSe-release ]; then
+    # Older SuSE/etc.
+    ...
+elif [ -f /etc/redhat-release ]; then
+    # Older Red Hat, CentOS, etc.
+    ...
+else
+    # Fall back to uname, e.g. "Linux <version>", also works for BSD, etc.
+    OS=$(uname -s)
+    VER=$(uname -r)
+fi
+echo -e "\033[37;44m Your OS: $OS at version: $VER \033[0m"
+if [[ "$OS" == "Manjaro Linux" ]];then
+	echo "Running Manjaro! Yay!"
+	sudo pacman -S --noconfirm cmake
+fi
+
+if [[ ! -d "$HOME/.vim" ]]; then
+#	vim --version | head -n 1
+#	VIM - Vi IMproved 8.1 (2018 May 17, compiled May 22 2018 22:53:39)
+#	gets vim version regex check the number 8 is in there?
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim && vim +PlugInstall +qall
+	python ~/.vim/plugged/youcompleteme/install.py
+fi
+
+echo -e "\033[30;43m -----------------------------------------------------\033[0m"
+echo -e "\033[30;43m Please reboot your system for changes to take effect!\033[0m"
+echo -e "\033[30;43m -----------------------------------------------------\033[0m"
+
+#NOTE:
+#need cmake to be installed pre vim check and install
+#Then go into .vim/plugged/youcompleteme/
+#and run install with python 3 on install.py
