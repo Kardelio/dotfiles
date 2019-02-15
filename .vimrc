@@ -172,6 +172,8 @@ vnoremap / /\v
 nnoremap aa ggVG
 nnoremap <leader>a ggVG
 
+nnoremap <space> za
+
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
