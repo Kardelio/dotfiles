@@ -1,6 +1,28 @@
 # !/bin/bash
 echo "Installing Dot Files"
+backUpDir="$HOME/.oldBashProfilesAndRcsBeforeDotfilesInstall"
+#TODO Creates backups of the users profiles etc
+mkdir -p "$backUpDir" || { echo "Could not make backup dir"; exit 1; }
+
+if [[ -f $HOME/.bash_profile ]]; then
+	echo "Moving old bash_profile to $backUpDir"
+	cp -n $HOME/.bash_profile "$backUpDir" || echo "---> File already copied and stored in $backUpDir";
+fi
+if [[ -f $HOME/.profile ]]; then
+	echo "Moving old profile to $backUpDir"
+	cp -n $HOME/.profile "$backUpDir" || echo "---> File already copied and stored in $backUpDir";
+fi
+if [[ -f $HOME/.bashrc ]]; then
+	echo "Moving old bashrc to $backUpDir"
+	cp -n $HOME/.bashrc "$backUpDir" || echo "---> File already copied and stored in $backUpDir";
+fi
+if [[ -f $HOME/.vimrc ]]; then
+	echo "Moving old vimrc to $backUpDir"
+	cp -n $HOME/.vimrc "$backUpDir" || echo "---> File already copied and stored in $backUpDir";
+fi
+
 echo -e "\033[41m PLEASE NOTE: you need to add i3 VIM keys yourself (in this file) \033[0m"
+#
 # TODO add below as part of script
 # BELOW IS i3 VIM KEYS ...
 #   # change focus
@@ -17,7 +39,7 @@ echo -e "\033[41m PLEASE NOTE: you need to add i3 VIM keys yourself (in this fil
 
 host=$(hostname)
 #So that profile and rc arent overwritten on my work PC
-if [[ "$host" != PC* ]]; then
+if [[ "$host" != PC58* ]]; then #This if clause is only useful for myself to stop certain files on my work machine being overwritten
 	echo "Not on Work Machine so running full install"
 	ln -sf $(realpath .bashrc) $HOME/.bashrc &> /dev/null && echo ".bashrc Successfully installed" || echo ".bashrc already installed" 
 	ln -sf $(realpath .bash_profile) $HOME/.bash_profile &> /dev/null && echo ".bash_profile Successfully installed" || echo ".bash_profile already installed" 

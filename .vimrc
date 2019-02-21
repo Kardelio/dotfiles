@@ -28,6 +28,7 @@
 
 syntax on
 set relativenumber
+set number
 set splitbelow splitright
 "set autoindent
 set smartindent
@@ -65,7 +66,12 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'valloric/youcompleteme'
 Plug 'udalov/kotlin-vim'
+Plug 'ap/vim-css-color'
 Plug 'dracula/vim'
+Plug 'severin-lemaignan/vim-minimap'
+"Plug 'idanarye/vim-vebugger'
+"Plug 'jvenant/vim-java-imports'
+"Plug 'akhaku/vim-java-unused-imports'
 call plug#end()
 
 " Call :PlugInstall to install plugins
@@ -79,13 +85,18 @@ color dracula
 
 " FOR NERDTREE
 let g:NERDTreeMapActivateNode='l'
-nnoremap r :NERDTreeToggle<CR>
+"nnoremap r :NERDTreeToggle<CR>
+nnoremap <leader>r :NERDTreeToggle<CR>
 noremap <C-o> :NERDTreeToggle<CR>
+
+" FOR vim-minimap
+let g:minimap_toggle='<leader>m'
 
 " FOR FZF Use ; :Files then ctrl-x
 noremap ; :Files<CR>
 noremap <leader>; :GFiles<CR>
 let g:fzf_action = {
+			\ 'enter': 'split',
 			\ 'ctrl-t': 'tab split',
 			\ 'ctrl-x': 'split',
 			\ 'ctrl-v': 'vsplit' }
@@ -131,6 +142,7 @@ function Keys()
 	echom "===== Bens Keys ====="
 	echom "za - toggle fold , zR - open all folds , zM - close all folds"
 	echom "r - open NERDTree , ; - for fzf Files , -; - for fzf GFiles"
+	echom "ma - mark at a , 'a go to a , dma delete mark at a"
 	let ok = input("Ok?")
 	set cmdheight=1
 endfunction
@@ -151,6 +163,11 @@ nnoremap <leader>h :call Keys()<CR>
 :	echom a:name
 :endfunction
 
+:function CloseAllSections()
+:	:normal zM
+:endfunction
+
+
 "a: tells vim this in in the arguement scope
 ":function Comment(from,to)
 ":	echom a:from
@@ -161,6 +178,16 @@ nnoremap <leader>h :call Keys()<CR>
 "
 " =====================
 
+" Shortcutting split navigation, saving a keypress:
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+nnoremap <leader>h :vertical resize -5<CR> 
+nnoremap <leader>j :resize -5<CR>
+nnoremap <leader>k :resize +5<CR> 
+nnoremap <leader>l :vertical resize +5<CR> 
 
 inoremap {<CR> {<Esc>o}<Esc>O
 "inoremap <leader><Space> <Esc>/<++><Enter>"_c4l
@@ -180,11 +207,12 @@ nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 :command Q q
 :command WQ wq
+:command Wq wq
 nnoremap Y 0y$
 :cmap Q! q!
 
-au VimEnter * echo "za - toggle fold , zR - open all folds , zM - close all folds , r - open NERDTree , ; - for fzf Files , -; - for fzf GFiles"
-"
+"au VimEnter * echo 'za - toggle fold , zR - open all folds , zM - close all
+"folds , r - open NERDTree , ; - for fzf Files , -; - for fzf GFiles'
 
 :autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
 :autocmd FileType python     nnoremap <buffer> <localleader>c I#<esc>
@@ -200,7 +228,6 @@ set clipboard=unnamed
 "nnoremap <leader>sv :source $MYVIMRC<cr>
 inoremap jj <esc>
 
-nnoremap <leader>r :resize 60<CR>
 
 nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
@@ -213,4 +240,9 @@ if has("autocmd")
 	augroup END
 endif
 
-
+":Ag to call
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)

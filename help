@@ -1,3 +1,9 @@
+MACOS - pmset -g batt
+	- Gets battery power for mac os
+
+http://www.endmemo.com/unicode/unicodeconverter.php
+	- awesome converter for ascii, unicode, hex character
+
 echo "█" | hexdump
 	- then take the 3 bits before the 0a
 	and put into echo -e '\x__\x__\x__'

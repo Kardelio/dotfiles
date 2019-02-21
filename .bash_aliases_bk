@@ -73,6 +73,6 @@ alias :q='exit'
 alias :wq='exit'
 alias origin='git config --get remote.origin.url'
 alias gitme='git config --local user.name kardelio; git config --local user.email kardeliogithub@outlook.com'
-alias ve='vi ~/.vimrc'
 alias help='vi ~/help'
 alias block="echo -e '\xE2\x96\x88'"
+alias vrc="vim ~/.vimrc"
