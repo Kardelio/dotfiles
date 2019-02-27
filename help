@@ -291,7 +291,7 @@ throw new RuntimeException("This is a crash");
 	- runs ls without alias
 	- use the back slash to run any command without alias
 
-find . -name "20180510*" -exec cp {} test \;
+find . -name "*20180510*" -exec cp {} test \;
 	- find all files with that name and carries out
 	- exec command of cp {} - means each file
 	- and the \ means one at a time, a + would be all at once

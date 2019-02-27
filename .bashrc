@@ -191,4 +191,6 @@ fi
 #	fi
 #}
 
+echo "$SHELL - $TERM"
+
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -76,3 +76,4 @@ alias gitme='git config --local user.name kardelio; git config --local user.emai
 alias help='vi ~/help'
 alias block="echo -e '\xE2\x96\x88'"
 alias vrc="vim ~/.vimrc"
+alias tt="date '+%H:%M' | figlet"

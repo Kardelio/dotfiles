@@ -1,4 +1,7 @@
 " ------ Vim Tips ------
+"
+" :set syntax=sh
+"
 " Words currently highlighted (see hi): NEXT IMPORTANT NOTE
 "
 " Use Ctrl+V to go into block visual, then Select the lines you want then press dd to delete comments or...
@@ -25,25 +28,30 @@
 " runs a command from norm on all lines
 "
 " ----------------------
-
+set nocompatible
 syntax on
 set relativenumber
 set number
 set splitbelow splitright
 "set autoindent
-set smartindent
+"set smartindent
+filetype plugin indent on
 set shiftwidth=4
 set complete-=i
 set showcmd
-set cursorline
 set showmatch
 set incsearch
 set tabstop=4
 set hlsearch
 set foldmethod=indent
 set foldlevelstart=20
+set modifiable
+set ignorecase
+set linebreak
+set scrolloff=3
 "set list
 " ABOVE enables the viewing of line breaks and indents
+
 
 set nostartofline
 "set cmdheight=2
@@ -57,20 +65,33 @@ let maplocalleader = "-"
 
 " +++++ Plugins using plug.vim - Plugin Manager +++++
 call plug#begin('~/.vim/plugged')
-
+"https://github.com/w0rp/ale.git
 Plug 'w0rp/ale'
+"https://github.com/vim-airline/vim-airline.git
 Plug 'vim-airline/vim-airline'
+"https://github.com/kshenoy/vim-signature.git
 Plug 'kshenoy/vim-signature'
+"https://github.com/junegunn/fzf.git
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"https://github.com/junegunn/fzf.vim.git
 Plug 'junegunn/fzf.vim'
+"https://github.com/scrooloose/nerdtree.git
 Plug 'scrooloose/nerdtree'
+"https://github.com/valloric/youcompleteme.git
 Plug 'valloric/youcompleteme'
+"https://github.com/udalov/kotlin-vim.git
 Plug 'udalov/kotlin-vim'
+"https://github.com/ap/vim-css-color.git
 Plug 'ap/vim-css-color'
+"https://github.com/dracula/vim.git
 Plug 'dracula/vim'
+"https://github.com/severin-lemaignan/vim-minimap.git
 Plug 'severin-lemaignan/vim-minimap'
+"https://github.com/idanarye/vim-vebugger.git
 "Plug 'idanarye/vim-vebugger'
+"https://github.com/jvenant/vim-java-imports.git
 "Plug 'jvenant/vim-java-imports'
+"https://github.com/akhaku/vim-java-unused-imports.git
 "Plug 'akhaku/vim-java-unused-imports'
 call plug#end()
 
@@ -82,9 +103,13 @@ call plug#end()
 let g:ycm_min_num_of_chars_for_completion = 1
 
 color dracula
-
+"Starting with cursor line off but -i toggles it on and off
+"set cursorline
+:hi CursorLine ctermbg=darkblue ctermfg=white
+nnoremap <leader>i :set cursorline!<CR>
 " FOR NERDTREE
 let g:NERDTreeMapActivateNode='l'
+let NERDTreeShowHidden=1
 "nnoremap r :NERDTreeToggle<CR>
 nnoremap <leader>r :NERDTreeToggle<CR>
 noremap <C-o> :NERDTreeToggle<CR>
@@ -237,6 +262,7 @@ vnoremap <C-y> 5<C-y>
 if has("autocmd")
 	augroup templates
 		autocmd BufNewFile *.sh 0r ~/.vim/temps/skel.sh
+		autocmd BufNewFile *.java 0r ~/.vim/temps/skel.java
 	augroup END
 endif
 
