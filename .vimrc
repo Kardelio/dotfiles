@@ -1,5 +1,10 @@
 " ------ Vim Tips ------
 "
+" Using surrond:
+" 	ys - standard
+" 	e.g. ysiw"    puts " around word
+" 	e.g. yss}     puts } around the line
+"	e.g. ds{	  deletes the surrondings
 " :set syntax=sh
 "
 " Words currently highlighted (see hi): NEXT IMPORTANT NOTE
@@ -87,6 +92,8 @@ Plug 'ap/vim-css-color'
 Plug 'dracula/vim'
 "https://github.com/severin-lemaignan/vim-minimap.git
 Plug 'severin-lemaignan/vim-minimap'
+"https://github.com/tpope/vim-surround,git
+Plug 'tpope/vim-surround'
 "https://github.com/idanarye/vim-vebugger.git
 "Plug 'idanarye/vim-vebugger'
 "https://github.com/jvenant/vim-java-imports.git
@@ -113,18 +120,46 @@ let NERDTreeShowHidden=1
 "nnoremap r :NERDTreeToggle<CR>
 nnoremap <leader>r :NERDTreeToggle<CR>
 noremap <C-o> :NERDTreeToggle<CR>
+"Below locates the current file in the dir
+nnoremap <silent> <leader>v :NERDTreeFind<CR>
 
 " FOR vim-minimap
 let g:minimap_toggle='<leader>m'
 
 " FOR FZF Use ; :Files then ctrl-x
-noremap ; :Files<CR>
+noremap ; :Sexyfzf<CR>
+"noremap ; :Files<CR>
 noremap <leader>; :GFiles<CR>
 let g:fzf_action = {
 			\ 'enter': 'split',
 			\ 'ctrl-t': 'tab split',
 			\ 'ctrl-x': 'split',
 			\ 'ctrl-v': 'vsplit' }
+
+let g:fzf_buffers_jump=1
+
+command! -bang -nargs=* Sexyfzf
+  \ call fzf#vim#files(<q-args>,fzf#vim#with_preview('right:50%'))
+
+"command! -bang -nargs=* Sexyfzf
+"  \ call fzf#vim#files(<q-args>,
+"  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+"  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+"  \                 <bang>0)
+let g:fzf_colors =
+  \ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 map <F7> mzgg=G`z
 " NOTE: Below is to enable lightline properly and airline(popular)
@@ -214,6 +249,8 @@ nnoremap <leader>j :resize -5<CR>
 nnoremap <leader>k :resize +5<CR> 
 nnoremap <leader>l :vertical resize +5<CR> 
 
+nnoremap n nzz
+
 inoremap {<CR> {<Esc>o}<Esc>O
 "inoremap <leader><Space> <Esc>/<++><Enter>"_c4l
 "autocmd FileType html inoremap ;p <p></p><Space><++><Esc>FpT>i
@@ -221,6 +258,7 @@ inoremap {<CR> {<Esc>o}<Esc>O
 nnoremap / /\v
 vnoremap / /\v
 
+nnoremap <leader>x :bd<CR>
 nnoremap aa ggVG
 nnoremap <leader>a ggVG
 
@@ -240,7 +278,6 @@ nnoremap Y 0y$
 "folds , r - open NERDTree , ; - for fzf Files , -; - for fzf GFiles'
 
 :autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-:autocmd FileType python     nnoremap <buffer> <localleader>c I#<esc>
 :autocmd FileType python     nnoremap <buffer> <localleader>c I#<esc>
 au BufNewFile,BufRead Jenkinsfile setf groovy
 
@@ -266,9 +303,3 @@ if has("autocmd")
 	augroup END
 endif
 
-":Ag to call
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
