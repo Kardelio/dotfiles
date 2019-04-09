@@ -31,7 +31,9 @@ function gitrep(){
 	if [[ ! -z $res ]];then
 		num=$(git status --porcelain | wc -l | tr -d ' ')
 		bran=$(git symbolic-ref --short HEAD)
-		echo -e "\033[44;37;1m$bran\033[0m \033[31m$num\033[0m "
+		stashes=$(git stash list | wc -l | sed 's/ //g')
+		branches=$(git branch | wc -l | sed 's/ //g')
+		echo -e " \033[44;37;1m$bran\033[0m \033[31m$num\033[0m \033[33m$stashes\033[0m \033[36m$branches\033[0m "
 	fi
 }
 
@@ -48,6 +50,7 @@ function doesBranchHaveParent(){
 				if [[ "$justBranch" =~ .*":::::".* ]];then
 					parentBranch=${justBranch#*:::::}
 					justName=${justBranch//:::::*/}
+					parentBranch=${parentBranch#*/}
 					echo -e " \033[30;43m$parentBranch\033[0m"
 					break
 				fi

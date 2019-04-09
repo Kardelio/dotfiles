@@ -94,6 +94,8 @@ Plug 'dracula/vim'
 Plug 'severin-lemaignan/vim-minimap'
 "https://github.com/tpope/vim-surround,git
 Plug 'tpope/vim-surround'
+"https://github.com/tpope/vim-commentary.git
+Plug 'tpope/vim-commentary' 
 "https://github.com/idanarye/vim-vebugger.git
 "Plug 'idanarye/vim-vebugger'
 "https://github.com/jvenant/vim-java-imports.git
@@ -133,8 +135,7 @@ noremap <leader>; :GFiles<CR>
 let g:fzf_action = {
 			\ 'enter': 'split',
 			\ 'ctrl-t': 'tab split',
-			\ 'ctrl-x': 'split',
-			\ 'ctrl-v': 'vsplit' }
+			\ 'space': 'tab split' }
 
 let g:fzf_buffers_jump=1
 
@@ -175,11 +176,13 @@ let g:ale_sign_column_always = 1
 hi Search term=standout guibg=red guifg=red ctermbg=Magenta ctermfg=white
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=DarkGray
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=Gray
+hi TODO term=standout guifg=blue guibg=white ctermbg=blue ctermfg=white
+call matchadd('TODO','TODO')
 hi NOTE term=standout guifg=blue guibg=white ctermbg=white ctermfg=blue
 call matchadd('NOTE','NOTE')
 hi NEXT term=standout guifg=red guibg=green ctermbg=blue ctermfg=red
 call matchadd('NEXT', 'NEXT')
-hi IMPORTANT term=bold ctermbg=red ctermfg=black
+hi IMPORTANT term=bold ctermbg=red ctermfg=white
 call matchadd('IMPORTANT', 'IMPORTANT')
 
 " ===== FUNCTIONS =====
@@ -249,11 +252,27 @@ nnoremap <leader>j :resize -5<CR>
 nnoremap <leader>k :resize +5<CR> 
 nnoremap <leader>l :vertical resize +5<CR> 
 
+nnoremap < V<
+nnoremap > V>
+
 nnoremap n nzz
 
 inoremap {<CR> {<Esc>o}<Esc>O
 "inoremap <leader><Space> <Esc>/<++><Enter>"_c4l
 "autocmd FileType html inoremap ;p <p></p><Space><++><Esc>FpT>i
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 nnoremap / /\v
 vnoremap / /\v
@@ -264,8 +283,10 @@ nnoremap <leader>a ggVG
 
 nnoremap <space> za
 
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
+"nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Left> :tabp<CR>
+"nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Right> :tabn<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 :command Q q
@@ -273,6 +294,21 @@ nnoremap <Down> :echoe "Use j"<CR>
 :command Wq wq
 nnoremap Y 0y$
 :cmap Q! q!
+
+:nnoremap rw cw<C-r>0<ESC>
+
+"MAC Command Key
+"These dont work in MAC VIM CLI at all have to be specially set, not portable
+"nnoremap <D-/> gcc
+"vnoremap <D-/> gc
+
+command! -bang -nargs=* Todo
+  \ call Todos() 
+
+
+function Todos()
+	echom "Todos:"
+endfunction
 
 "au VimEnter * echo 'za - toggle fold , zR - open all folds , zM - close all
 "folds , r - open NERDTree , ; - for fzf Files , -; - for fzf GFiles'
@@ -300,6 +336,7 @@ if has("autocmd")
 	augroup templates
 		autocmd BufNewFile *.sh 0r ~/.vim/temps/skel.sh
 		autocmd BufNewFile *.java 0r ~/.vim/temps/skel.java
+		autocmd BufNewFile *.cpp 0r ~/.vim/temps/skel.cpp
 	augroup END
 endif
 

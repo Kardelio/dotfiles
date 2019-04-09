@@ -78,3 +78,4 @@ alias block="echo -e '\xE2\x96\x88'"
 alias vrc="vim ~/.vimrc"
 alias tt="date '+%H:%M' | figlet"
 alias tk='tmux kill-session -t'
+alias gmt='git mergetool'

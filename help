@@ -1,3 +1,57 @@
+while read -r line ; do
+	echo "$line"
+done < <(echo -e "abc \n def \n poi \n 123")
+	- Loop round each line of output result from previous command
+
+git log | grep -E "Merged in MAS-8.."
+	- check git log for merged in items starting with 8
+du -shc *
+	- measure all items in folder with disk usage including a total -c
+tmux -
+	<prefix> + % - make new pane to side
+	<prefix> + " - make new pane below
+	<prefix> + t - shows time in current pane
+	<prefix> + c - creates a brand new window
+	<prefix> + z - toggles zoom of pane, temp fullscreen 'Z' in bar to show zoomed
+	<prefix> + f - find panes in find view
+	<prefix> + d - detach from session
+	<prefix> + p - switch between windows in current session
+	https://gist.github.com/MohamedAlaa/2961058
+read var
+	- echo "$var" 
+	- user input
+
+echo "abcd" | shasum -a 512
+	- shasum checksum
+sudo osascript -e "set Volume 0"
+	- set mac volume to 0
+
+git diff-tree --no-commit-id --name-only -r bd61ad98
+	- Nice way of seeing the actual modifications to files in git commit
+	- M A D etc...
+
+RX Help-
+Map - Receives each emission of the Obs and changes the format of data, so transform item bu applying a function to each item.
+Just - Just emit this one thing as a stream
+Filter - disposes of some information, it filters, based on the preds
+Subject - liek a observable 
+Scan - takes 2 params, basically eits an initial value applies a function to that vlue
+CombineLatest
+zip - only emits when has pair of data
+distinct - no repeting values
+delaySubscription - VERY different from delay
+takeutil - do observerable emmision until another observable fires
+interval - outputs at a rate and outputs a counting number
+distinctUntilChnaged - for basically checked last thing isnt the same as this emitting
+throttleFirst - add a time throttle to stream ignoring things outside fo the time zone
+retry() - number of times to retry plus predicate for saying "when this is ok do a retyr"
+
+adb shell am start -W -a android.intent.action.VIEW -d "https://play.google.com/store/apps/details?id=uk.co.very.myvery"
+	- -W is wait for launch to complete
+	- -d is the data
+	- -a is the action
+	- Fire implicit intent into device
+
 MACOS - pmset -g batt
 	- Gets battery power for mac os
 
