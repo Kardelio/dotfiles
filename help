@@ -1,3 +1,58 @@
+✓ - tick
+
+NGINX
+nginx
+	- Location: /usr/local/var/www
+	- Conf:		/usr/local/etc/nginx/nginx.conf
+	- Port: 	8080 (std)
+	- Load all files:	/usr/local/etc/nginx/servers
+	= brew services list
+	= brew services start nginx
+	= brew services stop nginx
+
+
+The Bash Reference manual has a section which attempts to enumerate the differences but some common sources of confusion include
+
+[[ is not available in sh (only [ which is more clunky and limited).
+sh does not have arrays.
+Some Bash keywords like local, source, function, and select are not portable to sh. (Some sh implementations supprt e.g. local.)
+Bash has many C-style syntax extensions like $'string\nwith\tC\aescapes' and the three-argument for((i=0;i<=3;i++)) loop, += increment assignment, etc.
+Bash supports <<<'here strings'.
+Bash has *.{png,jpg} and {0..12} brace expansion.
+~ refers to $HOME only in Bash (and more generally ~username to the home directory of username).This is in POSIX, but may be mising from some pre-POSIX /bin/sh implementations.
+Bash has process substitution with <(cmd) and >(cmd).
+Bash has Csh-style convenience redirection aliases like &| for 2>&1 | and &> for > ... 2>&1
+Bash supports coprocesses with <> redirection.
+Bash features a rich set of expanded non-standard parameter expansions such as ${substring:1:2}, ${variable/pattern/replacement}, case conversion, etc.
+Bash has significantly extended facilities for shell arithmetic (though still no floating-point support).
+Many, many Bash-only extensions to enable or disable optional behavior and expose internal state of the shell.
+Many, many convenience features for interactive use which however do not affect script behavior
+	- sh vs bash
+
+docker run -it -v kitty:/shebang bash
+	- run persistant docker container
+	- docker volume create kitty
+			-beforehand
+diff <(grep somestring file1) <(grep somestring file2)
+	<() is useful its like $() but lets you re-use the output
+
+Registers in Vim let you run actions or commands on text stored within them. To access a register, you type "a before a command, where a is the name of a register. If you want to copy the current line into register k, you can type
+"kyy
+Or you can append to a register by using a capital letter
+"Kyy
+You can then move through the document and paste it elsewhere using
+"kp
+To paste from system clipboard on Linux
+"+p
+To paste from system clipboard on Windows (or from "mouse highlight" clipboard on Linux)
+"*p
+To access all currently defined registers type
+:reg
+
+abd logcat "uk.co.very.myvery.test:*" | grep OkHttp"
+
+ls -lt  
+	- ls sort by date
 while read -r line ; do
 	echo "$line"
 done < <(echo -e "abc \n def \n poi \n 123")

@@ -79,3 +79,6 @@ alias vrc="vim ~/.vimrc"
 alias tt="date '+%H:%M' | figlet"
 alias tk='tmux kill-session -t'
 alias gmt='git mergetool'
+alias dnd='vi ~/dnd'
+alias gf='git fetch'
+alias fort='fortune | cowsay | lolcat'

@@ -252,8 +252,8 @@ nnoremap <leader>j :resize -5<CR>
 nnoremap <leader>k :resize +5<CR> 
 nnoremap <leader>l :vertical resize +5<CR> 
 
-nnoremap < V<
-nnoremap > V>
+nnoremap < V<V
+nnoremap > V>V
 
 nnoremap n nzz
 
@@ -282,6 +282,9 @@ nnoremap aa ggVG
 nnoremap <leader>a ggVG
 
 nnoremap <space> za
+
+nnoremap o o<esc>
+nnoremap O O<esc>
 
 "nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Left> :tabp<CR>

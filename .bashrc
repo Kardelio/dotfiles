@@ -32,6 +32,13 @@ function gitrep(){
 		num=$(git status --porcelain | wc -l | tr -d ' ')
 		bran=$(git symbolic-ref --short HEAD)
 		stashes=$(git stash list | wc -l | sed 's/ //g')
+		if [[ "$stashes" -gt 0 ]]; then
+			# Does the stash contain stash from this branch
+			sss=$(git stash list | grep "$bran" | wc -l | sed 's/ //g')
+			if [[ "$sss" -gt 0 ]]; then
+				stashes="$stashes!"
+			fi
+		fi
 		branches=$(git branch | wc -l | sed 's/ //g')
 		echo -e " \033[44;37;1m$bran\033[0m \033[31m$num\033[0m \033[33m$stashes\033[0m \033[36m$branches\033[0m "
 	fi
