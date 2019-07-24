@@ -1,5 +1,12 @@
 " ------ Vim Tips ------
 "
+" :g/PATTERN/d
+" 	- deletes lines with pattern in it
+"
+" %!grep app
+" %!echo 'dfasd'
+" 	- perform the command on the current file as stdin
+"
 " Using surrond:
 " 	ys - standard
 " 	e.g. ysiw"    puts " around word
@@ -32,6 +39,34 @@
 " :norm Iblahblah
 " runs a command from norm on all lines
 "
+" % to find bracket pair
+" will jump to the pair of the bracket
+"
+" :set wrap!
+" 	- toggle line wrap
+"
+" za - toggle fold , zR - open all folds , zM - close all folds
+"    Vim folding commands
+" ---------------------------------
+" zf#j creates a fold from the cursor down # lines.
+" zf/ string creates a fold from the cursor to string .
+" zj moves the cursor to the next fold.
+" zk moves the cursor to the previous fold.
+" za toggle a fold at the cursor.
+" zo opens a fold at the cursor.
+" zO opens all folds at the cursor.
+" zc closes a fold under cursor. 
+" zm increases the foldlevel by one.
+" zM closes all open folds.
+" zr decreases the foldlevel by one.
+" zR decreases the foldlevel to zero -- all folds will be open.
+" zd deletes the fold at the cursor.
+" zE deletes all folds.
+" [z move to start of open fold.
+" ]z move to end of open fold.
+"
+" CTAGS:
+" https://andrew.stwrt.ca/posts/vim-ctags/
 " ----------------------
 set nocompatible
 syntax on
@@ -54,6 +89,8 @@ set modifiable
 set ignorecase
 set linebreak
 set scrolloff=3
+set list
+set listchars=tab:>-,eol:$,space:·
 "set list
 " ABOVE enables the viewing of line breaks and indents
 
@@ -96,6 +133,8 @@ Plug 'severin-lemaignan/vim-minimap'
 Plug 'tpope/vim-surround'
 "https://github.com/tpope/vim-commentary.git
 Plug 'tpope/vim-commentary' 
+"https://github.com/nicwest/vim-http.git
+Plug 'nicwest/vim-http'
 "https://github.com/idanarye/vim-vebugger.git
 "Plug 'idanarye/vim-vebugger'
 "https://github.com/jvenant/vim-java-imports.git
@@ -123,25 +162,40 @@ let NERDTreeShowHidden=1
 nnoremap <leader>r :NERDTreeToggle<CR>
 noremap <C-o> :NERDTreeToggle<CR>
 "Below locates the current file in the dir
-nnoremap <silent> <leader>v :NERDTreeFind<CR>
+"nnoremap <silent> <leader>v :NERDTreeFind<CR>
 
 " FOR vim-minimap
 let g:minimap_toggle='<leader>m'
 
-" FOR FZF Use ; :Files then ctrl-x
-noremap ; :Sexyfzf<CR>
-"noremap ; :Files<CR>
-noremap <leader>; :GFiles<CR>
+function! s:GotoOrOpen(command, ...)
+  for file in a:000
+    if a:command == 'e'
+      exec 'e ' . file
+    else
+      exec "tab drop " . file
+    endif
+  endfor
+endfunction
+
+command! -nargs=+ GotoOrOpen call s:GotoOrOpen(<f-args>)
+
 let g:fzf_action = {
 			\ 'enter': 'split',
 			\ 'ctrl-t': 'tab split',
-			\ 'space': 'tab split' }
-
+			\ 'space': 'GotoOrOpen tab' }
+			"\ 'space': 'tab split' }
 let g:fzf_buffers_jump=1
 
-command! -bang -nargs=* Sexyfzf
+command! -bang -nargs=* BasicFzf
+  \ call fzf#run(fzf#vim#with_preview({'source': 'find . -not -path "*/\.*" -type f', 'right': '50%', 'window': '30split'})) 
+
+command! -bang -nargs=* FullFzf
   \ call fzf#vim#files(<q-args>,fzf#vim#with_preview('right:50%'))
 
+noremap ; :FullFzf<CR>
+noremap ' :BasicFzf<CR>
+noremap <leader>; :GFiles<CR>
+"
 "command! -bang -nargs=* Sexyfzf
 "  \ call fzf#vim#files(<q-args>,
 "  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
@@ -167,6 +221,8 @@ map <F7> mzgg=G`z
 set laststatus=2
 set noshowmode
 let g:airline#extensions#ale#enabled = 1
+let g:airline_section_y = airline#section#create(['%b %B'])
+
 let g:ale_sign_column_always = 1
 " PLUGIN indent_guides
 "let g:indent_guides_enable_on_vim_startup = 1
@@ -210,7 +266,8 @@ function Keys()
 	set cmdheight=1
 endfunction
 
-nnoremap <leader>h :call Keys()<CR>
+nnoremap <leader>e :call Keys()<CR>
+nnoremap <leader>s :call ToggleSpecialCharsVisibility()<CR>
 
 ":call Yo()
 :function Yo()
@@ -230,6 +287,9 @@ nnoremap <leader>h :call Keys()<CR>
 :	:normal zM
 :endfunction
 
+:function ToggleSpecialCharsVisibility()
+:	:set list!
+:endfunction
 
 "a: tells vim this in in the arguement scope
 ":function Comment(from,to)
@@ -252,8 +312,11 @@ nnoremap <leader>j :resize -5<CR>
 nnoremap <leader>k :resize +5<CR> 
 nnoremap <leader>l :vertical resize +5<CR> 
 
-nnoremap < V<V
-nnoremap > V>V
+"gv = is start visual mode with same selection as before
+vnoremap > >gv
+vnoremap < <gv
+"nnoremap < V<V
+"nnoremap > V>V
 
 nnoremap n nzz
 
@@ -280,6 +343,9 @@ vnoremap / /\v
 nnoremap <leader>x :bd<CR>
 nnoremap aa ggVG
 nnoremap <leader>a ggVG
+nnoremap J :.!jq .<CR>:noh<CR>
+nnoremap <leader>n :%s/\n//g<CR>
+nnoremap <leader>d :%s/ //g<CR>
 
 nnoremap <space> za
 
@@ -305,12 +371,26 @@ nnoremap Y 0y$
 "nnoremap <D-/> gcc
 "vnoremap <D-/> gc
 
+nnoremap <leader>v :call Vrc()<CR>
+function Vrc()
+	echom "Opening ~/.VIMRC"
+	:sp $HOME/.vimrc
+endfunction
+
+function GetCurrentLine()
+	let ln = line('.')
+	echom "Current line is: "ln
+	echom "Register a: "@a
+	let ok = input("Ok?")
+	set cmdheight=1
+endfunction
+
 command! -bang -nargs=* Todo
   \ call Todos() 
 
-
 function Todos()
 	echom "Todos:"
+	:.!todo
 endfunction
 
 "au VimEnter * echo 'za - toggle fold , zR - open all folds , zM - close all
@@ -324,9 +404,9 @@ set clipboard=unnamed
 :vnoremap <leader>c y<esc>Go<esc>p:.!pbcopy<cr> 
 ":vnoremap <C-c> :w !pbcopy<CR><CR> 
 ":noremap <C-v> :r !pbpaste<CR><CR>
-:vnoremap <leader>d :echo "tsststr"
+":vnoremap <leader>d :echo "tsststr"
 "nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-"nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <leader>sv :source %<cr>
 inoremap jj <esc>
 
 

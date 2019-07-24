@@ -1,3 +1,179 @@
+echo -e "a\nb\nc\nd" | fzf | xargs -I % bash -c 'if [[ "%" == "a" ]]; then echo "rrrr"; fi'
+	inline if from fzf with xargs AWESOME
+
+tmux attach -t "$(tmux ls | fzf | awk '{print $1}' | sed 's/://g')"
+	-tmux ls in fzf then open it
+
+vim $(ls | fzf)
+	- open output of fzf into vim
+
+ls | fzf
+	- pipe into fzf
+	- it will return the file name on completion
+
+find . -mtime -1 -maxdepth 1
+	- Find files only in this dir that were changed WITHIN the last day
+find . -mtime 1 -maxdepth 1
+	- Find files only in this dir that were changed EXACTLY the last day
+
+echo -e '\U0001F600'
+	- https://unicode.org/emoji/charts/full-emoji-list.html
+	- echo unicode characters in the terminal
+
+git show stash@{1}^3
+	- git stash show the untracked portion of the stash
+	- UNTRACKED
+
+find . -type f -maxdepth 1 -exec grep -nl "git fetch" {} \;
+	- grep with maxdepth using find
+
+npm list -g -depth 0
+	list npm modules gloabbly and just the parents
+
+ctags -R .
+ctags -R -f ./.git/tags .
+	- use ctags to create ctags first is just where it is
+	- second is hidden within the git folder
+
+g ctrl+a
+	- auto increment numbers
+	- select not the first number but the second one
+	- then select v block to bottom and 
+	- g ctl+a
+e.g.
+	server-1
+	server-2
+	server-3
+	server-4
+	server-5
+	server-6
+
+defaults write -g ApplePressAndHoldEnabled -bool false
+	 - To avoid mutliple press on j and k
+
+https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
+	- IMPORTANT - Bash variables inside of scripts
+
+local.properties
+	- files required for android sdk ANDROID_SDK_ROOT to be set, copy from emar-etc...
+
+./gradlew testVeryDebug --tests=CUIViewModelTests.initialValues_test
+	- Run single junit test from terminal instead of inside android studio
+
+https://jsonplaceholder.typicode.com/
+	- JSON placeholder 
+	- Free Json api free json rest endpoint
+
+https://github.com/p-gen/smenu
+https://github.com/2d-inc/developer_quest
+https://github.com/jwiegley/git-scripts
+https://github.com/unixorn/git-extra-commands
+
+
+timestamp=$( date +%T )
+	- timestamp nice
+
+Shift+Option+F
+	- Mas VSCode vs code visual studio code auto format autoformat code
+
+array=( one two three )
+for i in "${array[@]}"
+do
+	echo $i
+done
+	- loop around array in BASH bash for loop array
+
+echo -e "a \nb \nc" | sort | nl | sed 's/[[:space:]]//g'
+	- Bash for echoing sorting adding line numbers and then removing all whitespace
+
+https://developer.okta.com/blog/2018/08/10/basic-android-without-an-ide
+	- Setup android app without IDE
+
+tmux copy and paste -
+	1. Tmux power key : ctrl + a
+	2. [
+	3. move using arrows to start of text
+	4. space bar to enable highlight mode
+	5. ENTER
+	-
+	Now you can paste with ctrl + a then ]
+
+adb shell am start -W -a android.intent.action.VIEW -d  "webaddress.co.uk"
+	- Use adb to trigger deep links for app without package specified, will trigger disambiguation dialog
+	- Android
+Kotlin:
+	val abc : (name: String) -> String = { "$name - abcFun" }
+
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+	- Bash Strict Mode USE THIS BEN
+
+# unicode "✗"
+readonly fancyx='\342\234\227'
+# unicode "✓"
+readonly checkmark='\342\234\223'
+
+https://dev.to/yashints/let-s-talk-seo-10-tips-you-should-know-4n6k
+	- SEO TIPS
+
+git stash save -u "SAVE_MESSAGE"
+	- stash with save message and all untracked files too
+
+> file redirects stdout to file
+1> file redirects stdout to file
+2> file redirects stderr to file
+&> file redirects stdout and stderr to file
+	- redirect output 
+
+\help complete
+	- \help (without the alias)
+	- builtin command, like complete
+
+https://stackoverflow.com/questions/40653560/where-are-git-stashes-stored
+	- where are git stashes stored...
+	- ./git/refs/stash = most recent one
+	- ./git/re/bash
+
+
+manpath
+	- Prints all the places man looks for man pages
+	- Also it is mostly /usr/share/man
+
+View app dependencies
+	./gradlew app:dependencies
+		- very cool prints graph or tree of all dependencies
+
+
+//    val p = Paint().apply {
+//        color = Color.BLACK
+//        style = Paint.Style.FILL
+//        textSize = 200f
+//    }
+}
+//TODO
+If the stash wont apply back on
+and you get the 
+"could not restore untracked files form stash" error in git
+	- git stash show -p | git apply
+	- Kind of like the unix diff and patch commands (very cool)
+
+User adding in terminal:
+	useradd -m name
+			-m makes home dir
+	userdel name
+	usermod --shell /bin/bash name
+
+git mv oldFolderName newFolderName
+	- Best way in git to change folder names for a repo
+	- https://stackoverflow.com/questions/11183788/in-a-git-repository-how-to-properly-rename-a-directory
+
+Gradle sync fail with warning.
+	- delete .idea folder
+	- delete all *.iml files
+	- re-import project using new open android studio
+	= https://stackoverflow.com/questions/28668252/android-studio-error-unsupported-modules-detected-compilation-is-not-supported
+
 ✓ - tick
 
 NGINX
@@ -278,7 +454,8 @@ curl cheat.sh/bash/while+loop
 done < "file"
 	- read over the contents of a file line by line
 
- grep -nr 'ben' .
+ grep -nrI 'ben' .
+	- -I is ignore binary files
  	- looks a in directory for a specific word
 	- and displays line number and recursively seraches down too
  
