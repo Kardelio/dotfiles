@@ -1,4 +1,29 @@
 " ------ Vim Tips ------
+" :tabonly
+"   only but for tabs
+" :tabnew
+"   new tab empty
+"
+" :%s/pattern//gn
+" Find how many times a search pattern exists in file
+"
+" Below is how to profile in vim to see what is being slow
+" :profile start profile.log
+" :profile func *
+" :profile file *
+" "At this point do slow actions
+" :profile pause
+" :noautocmd qall!
+"
+" Very useful link for creating vim plugins:
+" https://gist.github.com/nelstrom/1056049/784e252c3de653e204e9e128653010e19fbd493f
+" Guide to making vim plugins
+" https://blog.semanticart.com/2017/01/05/lets-write-a-basic-vim-plugin/
+"
+":redir @a
+":function
+":redir END
+" paste register a 
 "
 " :g/PATTERN/d
 " 	- deletes lines with pattern in it
@@ -73,6 +98,9 @@ syntax on
 set relativenumber
 set number
 set splitbelow splitright
+set backupdir=~/swpfiles
+set directory=~/swpfiles
+"set spell spelllang=en_gb
 "set autoindent
 "set smartindent
 filetype plugin indent on
@@ -83,14 +111,18 @@ set showmatch
 set incsearch
 set tabstop=4
 set hlsearch
-set foldmethod=indent
+"
+set foldmethod=syntax
+"syntax, indent
 set foldlevelstart=20
+"
 set modifiable
 set ignorecase
 set linebreak
 set scrolloff=3
 set list
 set listchars=tab:>-,eol:$,space:·
+set expandtab
 "set list
 " ABOVE enables the viewing of line breaks and indents
 
@@ -135,6 +167,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary' 
 "https://github.com/nicwest/vim-http.git
 Plug 'nicwest/vim-http'
+"TODO
+Plug 'gabrielelana/vim-markdown'
 "https://github.com/idanarye/vim-vebugger.git
 "Plug 'idanarye/vim-vebugger'
 "https://github.com/jvenant/vim-java-imports.git
@@ -160,7 +194,7 @@ let g:NERDTreeMapActivateNode='l'
 let NERDTreeShowHidden=1
 "nnoremap r :NERDTreeToggle<CR>
 nnoremap <leader>r :NERDTreeToggle<CR>
-noremap <C-o> :NERDTreeToggle<CR>
+"noremap <C-o> :NERDTreeToggle<CR>
 "Below locates the current file in the dir
 "nnoremap <silent> <leader>v :NERDTreeFind<CR>
 
@@ -186,6 +220,9 @@ let g:fzf_action = {
 			"\ 'space': 'tab split' }
 let g:fzf_buffers_jump=1
 
+"sets the AG quickfix K window to open in new tab instead
+:set switchbuf+=newtab
+
 command! -bang -nargs=* BasicFzf
   \ call fzf#run(fzf#vim#with_preview({'source': 'find . -not -path "*/\.*" -type f', 'right': '50%', 'window': '30split'})) 
 
@@ -193,7 +230,7 @@ command! -bang -nargs=* FullFzf
   \ call fzf#vim#files(<q-args>,fzf#vim#with_preview('right:50%'))
 
 noremap ; :FullFzf<CR>
-noremap ' :BasicFzf<CR>
+"noremap ' :BasicFzf<CR>
 noremap <leader>; :GFiles<CR>
 "
 "command! -bang -nargs=* Sexyfzf
@@ -262,12 +299,14 @@ function Keys()
 	echom "za - toggle fold , zR - open all folds , zM - close all folds"
 	echom "r - open NERDTree , ; - for fzf Files , -; - for fzf GFiles"
 	echom "ma - mark at a , 'a go to a , dma delete mark at a"
+	echom "z= - spell fix, ]s and [s move between mistake, zg mark spell as ok"
 	let ok = input("Ok?")
 	set cmdheight=1
 endfunction
 
-nnoremap <leader>e :call Keys()<CR>
+"nnoremap <leader>e :call Keys()<CR>
 nnoremap <leader>s :call ToggleSpecialCharsVisibility()<CR>
+nnoremap <leader>ss :call Shellcheck()<CR>
 
 ":call Yo()
 :function Yo()
@@ -319,8 +358,10 @@ vnoremap < <gv
 "nnoremap > V>V
 
 nnoremap n nzz
+nnoremap dd "dY"_dd
+vnoremap d "dYgv"_d
 
-inoremap {<CR> {<Esc>o}<Esc>O
+"inoremap {<CR> {<Esc>o}<Esc>O
 "inoremap <leader><Space> <Esc>/<++><Enter>"_c4l
 "autocmd FileType html inoremap ;p <p></p><Space><++><Esc>FpT>i
 
@@ -343,7 +384,7 @@ vnoremap / /\v
 nnoremap <leader>x :bd<CR>
 nnoremap aa ggVG
 nnoremap <leader>a ggVG
-nnoremap J :.!jq .<CR>:noh<CR>
+"nnoremap J :.!jq .<CR>:noh<CR>
 nnoremap <leader>n :%s/\n//g<CR>
 nnoremap <leader>d :%s/ //g<CR>
 
@@ -393,12 +434,19 @@ function Todos()
 	:.!todo
 endfunction
 
+function Shellcheck()
+	echom "Running Shellcheck *"
+	:norm ggVGdd
+	:.!shellcheck *
+endfunction
+
 "au VimEnter * echo 'za - toggle fold , zR - open all folds , zM - close all
 "folds , r - open NERDTree , ; - for fzf Files , -; - for fzf GFiles'
 
 :autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
 :autocmd FileType python     nnoremap <buffer> <localleader>c I#<esc>
 au BufNewFile,BufRead Jenkinsfile setf groovy
+au BufNewFile,BufRead Fastfile setf ruby
 
 set clipboard=unnamed
 :vnoremap <leader>c y<esc>Go<esc>p:.!pbcopy<cr> 
@@ -406,7 +454,8 @@ set clipboard=unnamed
 ":noremap <C-v> :r !pbpaste<CR><CR>
 ":vnoremap <leader>d :echo "tsststr"
 "nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source %<cr>
+nnoremap <leader>sv :source ~/.vimrc<cr>
+
 inoremap jj <esc>
 
 
@@ -417,9 +466,12 @@ vnoremap <C-y> 5<C-y>
 
 if has("autocmd")
 	augroup templates
+		autocmd BufNewFile *.html 0r ~/.vim/temps/skel.html
 		autocmd BufNewFile *.sh 0r ~/.vim/temps/skel.sh
 		autocmd BufNewFile *.java 0r ~/.vim/temps/skel.java
 		autocmd BufNewFile *.cpp 0r ~/.vim/temps/skel.cpp
 	augroup END
 endif
 
+" My experimental plugin
+set runtimepath+=/Users/ldev507/git/benvimplugin.vim

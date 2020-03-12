@@ -1,3 +1,202 @@
+adb shell am set-debug-app -w --persistent uk.co.very.myvery
+adb shell am clear-debug-app uk.co.very.myvery 
+    set the debugger to debug from start on app start
+    and to disable it
+
+docker rm $(docker ps -a -q -f status=exited)
+    pruge all for docker 
+
+export ANDROID_HOME="~/Android"
+    set the android sdk in the terminal
+
+git blame app/src/main/java/com/shopdirect/shop/viewmodel/DepartmentsViewModel.kt  | vim -
+    blame file and put in vim
+
+ssh-keygen -p
+    change password on id_rsa
+    leave blank to make empty password (REMOVE PASSWORD FROM ID_RSA)
+
+w3m whatthecommit.com | head -n 1
+    get random commit message from awesome site
+
+while ! ./run.sh; do sleep 1; done
+    run the run.sh script until it successfully exectus then stop trying
+
+git stash show -p > patchfile
+git apply patchfile
+    - save stash to patchfile
+    - and eventually re apply those chagnes
+
+ranger
+use V like vim to select files
+:bulkrename
+edit
+save and save
+
+ssh pi@192.168.23.92 'sudo shutdown -r now'
+    ssh and send commands
+
+reimage the ATOM pis
+    save the image of one...
+    sudo dd if=/dev/sda of=~/atomimage.img
+    write to card
+    sudo dd if=~/atomimage.img of=/dev/sda bs=16M status=progress
+    DONE
+
+gdate -d "@TIMESTAMP"
+    - convert timestamp into date
+
+ls -a | grep -E "^\."
+    view hidden files in dir
+
+git remote add bitbucket git@bitbucket.org:username/example.git
+    add second remote to git repo
+
+In vim to serach for NOT a pattern
+e.g. lines not start with this pattern
+/^#\@!
+^ above is finding lines not starting with a #
+the \@! is the important bit
+
+tldr
+    - github repo for terminal command help
+
+/Users/ldev507/Library/Android/sdk/emulator/emulator -list-avds
+/Users/ldev507/Library/Android/sdk/emulator/emulator -avd PIXEL_Q
+    - list and start emulators from the terminal
+    - adb
+
+Any file in VIM you can use
+:%TOhtml 
+and convert it to a cool html file
+
+readlin -f file
+    print file full path
+
+
+./gradlew testVeryDebug
+./gradlew testVeryDebug --tests=CUIViewModelTests.initialValues_test
+	- Run single junit test from terminal instead of inside android studio
+
+./gradlew connectedVeryDebugAndroidTest
+./gradlew -Pandroid.testInstrumentationRunnerArguments.class=com.shopdirect.unit.onboarding.view.OnBoardingFragmentTests#selectedAMI connectedVeryDebugAndroidTest
+./gradlew -Pandroid.testInstrumentationRunnerArguments.class=com.shopdirect.unit.onboarding.view.OnBoardingFragmentTests#test_removeItemSetCorrectly_scrollBackToCorrectOne connectedVeryDebugAndroidTest
+ test_removeItemSetCorrectly_scrollBackToCorrectOne(com.shopdirect.unit.onboarding.view.OnBoardingFragmentTests)
+    -run specific android test from the terminal
+    - this one runs the selectedAMI function from the class AMIJourneyTests
+    IMPORTANT
+
+ls -l `which pip`
+ls -l `which pip3`
+    - really useful to see symlinks 
+
+https://math2001.github.io/post/variable-scopes-vim/
+https://www.gilesorr.com/blog/vim-variable-scope.html
+    - vimscript variable scopes
+
+https://techpatterns.com/forums/about1138.html
+    - bash getopts long and short
+
+for (( c=0; c<$length; c++ ))
+do  
+    echo "$c"
+done
+    - bash for loop with index and iteration
+
+git log --full-history -- README.md
+    - see full history of file
+    - see when file got deleted for example
+
+du -sh * | sort -h
+    - disk usage and sort using human readable variation
+    - sort by size
+
+ssh-keygen
+    just on pi for bitbucket ssh key
+ssh-keygen -f ~/atomkey -t rsa -b 4096
+    - generate key pair for ssh
+    - then copy the .pub into the server and put in authorized keys
+    using:
+    cat ~/atomkey.pub | ssh pi@192.168.23.92 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
+
+brew --prefix
+    /usr/local
+brew info
+
+git log --all --grep='conditional'
+    search git repo for string in commit message
+
+vim folding in json
+:setlocal foldmethod=syntax
+
+git diff v2.2.0_2435_RC v2.2.1_2439_RC --stat > diffFile
+git diff v2.2.0_2435_RC v2.2.1_2439_RC >> diffFile
+	see diffs between two tags git
+
+pipe output into vim
+	echo test | vim -
+
+git clean -n
+	run clean in dry mode, so it wont run it will tell you what files will be effect
+git clean -f 
+	do it when ready
+
+shellcheck file
+	- bash lint in the terminal
+	- lint check your bash script
+
+find . -name ".bash*" -delete
+	finds and deletes all hidden files starting with bash
+
+MOUNT HARD DRIVE TO FS --- 
+1.  look in the /dev folder
+    ls -l /dev/disk/by-uuid
+and find the one that is something like sda1 or sdb1 thats your HD
+2. mkdir /media/usb
+3. sudo chown -R pi:pi /media/usb
+this chowns the dir with pi as the ownder and as the group
+the -R is recursive for anuthing beneath it.
+4. sudo mount /dev/sda_ /mount/usb -o uid=pi,gid=pi
+the last bit is options and it sets the user and group to be the specified ones so that you can read and write properly etc...
+5. to unmount
+sudo umount /media/usb
+
+sed -i -e 's/a/b/g' -e 's/b/d/g' file
+	-multiple string changes find and replace in sed
+
+ssh -i private_key_file user@ip
+	ssh in using a specific key file instead of your private key in .ssh
+
+https://github.com/onceupon/Bash-Oneliner
+	- Very useful! Bash One Liners
+
+NGINX on my mac default directory
+	/usr/local/var/www
+	can use nginx -V to find out
+
+see open ports on machine: ANY OF THESE
+	sudo lsof -i -P -n | grep LISTEN 
+	sudo netstat -tulpn | grep LISTEN
+	sudo lsof -i:22 ## see a specific port such as 22 ##
+
+type weird characters into vim like 
+windows carriage return thing
+	insert mode
+	type <CTRL + V> then your char in this case
+	<CTRL + M>
+
+paste into command line in vim
+	<CTRL+R>"
+	or instead of " whatever buffer you want to use
+
+Auto format in android studio
+	- Command + Option + L
+
+256 color for bash
+\033[48;5;___m
+	-https://misc.flogisoft.com/bash/tip_colors_and_formatting
+	256 color on the background
+
 echo -e "a\nb\nc\nd" | fzf | xargs -I % bash -c 'if [[ "%" == "a" ]]; then echo "rrrr"; fi'
 	inline if from fzf with xargs AWESOME
 
@@ -57,9 +256,6 @@ https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html
 local.properties
 	- files required for android sdk ANDROID_SDK_ROOT to be set, copy from emar-etc...
 
-./gradlew testVeryDebug --tests=CUIViewModelTests.initialValues_test
-	- Run single junit test from terminal instead of inside android studio
-
 https://jsonplaceholder.typicode.com/
 	- JSON placeholder 
 	- Free Json api free json rest endpoint
@@ -98,6 +294,7 @@ tmux copy and paste -
 	-
 	Now you can paste with ctrl + a then ]
 
+adb shell am start -W -a android.intent.action.VIEW -d "https://dev106-very.everyday.co.uk"
 adb shell am start -W -a android.intent.action.VIEW -d  "webaddress.co.uk"
 	- Use adb to trigger deep links for app without package specified, will trigger disambiguation dialog
 	- Android
@@ -308,7 +505,7 @@ git diff -- **/REGEX*
 python -m pip install <package>
 	- Use python 3 to install with pip (multiple python versions)
 
-ln -s _original_ new_file
+ln -s original new_file
 	-Symbolic link
 
 g++ -std=c++11
@@ -522,6 +719,10 @@ set +x
 + - one or more
 	regex tip
 
+2>
+	writes errors to somewhere
+2> /dev/null
+	writes errors to null
 >&2
 	- writes to stderr
 

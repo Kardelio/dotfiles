@@ -27,6 +27,7 @@ alias gbl='git branch'
 alias gb='git symbolic-ref --short HEAD'
 alias gn='git rev-list --count head'
 alias gpb='git push origin $(gb)'
+alias gp='git pull'
 alias gfiles='git show --pretty="" --name-only' #shows files in last commit 
 alias devs='adb devices'
 alias sl='ls'
@@ -66,7 +67,8 @@ alias tr1='tree -L 1'
 alias tr2='tree -L 2'
 alias tr3='tree -L 3'
 alias gba="git branch -a"
-alias python="python3"
+#alias python="python3"
+alias p='python3'
 alias buildAndRunApp='./gradlew assembleDebug && ./gradlew installDebug && adb shell am start -n packagename/com.package.activty'
 alias links='ls -la | grep "\->"'
 alias :q='exit'
@@ -93,3 +95,15 @@ alias vv='vim $(ls | fzf)'
 #IGNORE the shellcheck error here it is wrong, awk is using the pos param
 alias tm='tmux attach -t "$(tmux ls | fzf | awk '\''{print $1}'\'' | sed '\''s/://g'\'')"'
 alias op='vim $(find . -type f -maxdepth 10 | fzf)'
+alias ports="lsof -i -P -n | grep LISTEN"
+alias openfiles="lsof | grep /Users/ldev507 | grep -v /Users/ldev507/Library"
+alias watch="while [ 1 ]; do ls -la; sleep 1; clear; done"
+alias pwd="pwd -P"
+alias sc="shellcheck"
+alias configDev='curl -H "Application:VERY" -H "Content-Type:application/json" -H "User-Agent:SDAndroidApp" -H "Version-Number:2.3.1"  https://orla-dev-zadtie39.lsdg.com/mobile/appConfiguration | vim - "+ :set syntax=json" "+ normal J"'
+alias configProd='curl -H "Application:VERY" -H "Content-Type:application/json" -H "User-Agent:SDAndroidApp" -H "Version-Number:2.3.1"  https://orla.very.co.uk/mobile/appConfiguration | vim - "+ :set syntax=json" "+ normal J"'
+alias packs='adb shell pm list packages'
+alias dua='du -sh * | sort -h'
+alias npmlist='npm list -g --depth 0'
+alias nm='./node_modules/nodemon/bin/nodemon.js app.js'
+alias randcomm='w3m whatthecommit.com | head -n 1'
