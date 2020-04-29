@@ -1,4 +1,38 @@
-" ------ Vim Tips ------
+"==================================================
+"==================== VIM HELP ====================
+"==================================================
+"VIM German or French
+":digraphs
+"CTRL + V then number 
+"252 = ü
+"246 = ö
+"235 = ë
+"OR
+"CTRL + K then draw it like
+"CTRL + K e: = ë
+"CTRL + K u: = ü
+"
+" OMG important
+" To find every line matching a pattern in a given range
+" and perform a normal command on those lines use g
+" so...
+"  <,>g/pattern/exe "normal! I#"
+"  example
+"  <,>g/^\d/exe "normal! I$"
+"   for every line in range that starts with a digiti run the normal command
+"   that puts a $ infront of each line
+"
+" To use string replacement to add newline character
+"  do usual string search and replace (sed)
+"   then use this character instead of \n 
+"   to get this character type:
+"   CTRL + v, then hit ENTER
+" https://stackoverflow.com/questions/71323/how-to-replace-a-character-by-a-newline-in-vim
+"
+" use :Ag keyword
+"   to serach for strings in all files below
+"   grep (use Ag instead of grep and vimgrep)
+"
 " :tabonly
 "   only but for tabs
 " :tabnew
@@ -93,6 +127,14 @@
 " CTAGS:
 " https://andrew.stwrt.ca/posts/vim-ctags/
 " ----------------------
+"==================================================
+"================== / VIM HELP ====================
+"==================================================
+
+
+"==================================================
+"====================== SETS ======================
+"==================================================
 set nocompatible
 syntax on
 set relativenumber
@@ -112,9 +154,9 @@ set incsearch
 set tabstop=4
 set hlsearch
 "
-set foldmethod=syntax
+"set foldmethod=syntax
 "syntax, indent
-set foldlevelstart=20
+"set foldlevelstart=20
 "
 set modifiable
 set ignorecase
@@ -124,18 +166,23 @@ set list
 set listchars=tab:>-,eol:$,space:·
 set expandtab
 "set list
-" ABOVE enables the viewing of line breaks and indents
-
-
+"OPTIONAL ABOVE enables the viewing of line breaks and indents
 set nostartofline
 "set cmdheight=2
-" ABOVE is used to make the command bar bigger
+"OPTIONAL ABOVE is used to make the command bar bigger
 set backspace=indent,eol,start
-nnoremap £ i#
-inoremap £ #
+"==================================================
+"==================== / SETS ======================
+"==================================================
 
+
+"==================================================
+"==================== PLUGINS =====================
+"==================================================
 let mapleader = "-"
 let maplocalleader = "-"
+nnoremap £ i#
+inoremap £ #
 
 " +++++ Plugins using plug.vim - Plugin Manager +++++
 call plug#begin('~/.vim/plugged')
@@ -277,6 +324,26 @@ hi NEXT term=standout guifg=red guibg=green ctermbg=blue ctermfg=red
 call matchadd('NEXT', 'NEXT')
 hi IMPORTANT term=bold ctermbg=red ctermfg=white
 call matchadd('IMPORTANT', 'IMPORTANT')
+hi OPTIONAL term=bold ctermbg=green ctermfg=white
+call matchadd('OPTIONAL', 'OPTIONAL')
+"*cterm-colors*
+"NR-16   NR-8    COLOR NAME 
+"0       0       Black
+"1       4       DarkBlue
+"2       2       DarkGreen
+"3       6       DarkCyan
+"4       1       DarkRed
+"5       5       DarkMagenta
+"6       3       Brown, DarkYellow
+"7       7       LightGray, LightGrey, Gray, Grey
+"8       0*      DarkGray, DarkGrey
+"9       4*      Blue, LightBlue
+"10      2*      Green, LightGreen
+"11      6*      Cyan, LightCyan
+"12      1*      Red, LightRed
+"13      5*      Magenta, LightMagenta
+"14      3*      Yellow, LightYellow
+"15      7*      White
 
 " ===== FUNCTIONS =====
 
@@ -389,6 +456,10 @@ nnoremap <leader>n :%s/\n//g<CR>
 nnoremap <leader>d :%s/ //g<CR>
 
 nnoremap <space> za
+
+"nnoremap <leader>sn /\=.*\=\n\=.*\=\n\=.*\=<CR>
+nnoremap <leader>sn /=.*=\n=.*=\n=.*=\n<CR>
+"nnoremap <leader>sn /cat<CR>
 
 nnoremap o o<esc>
 nnoremap O O<esc>

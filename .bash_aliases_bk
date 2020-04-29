@@ -16,6 +16,15 @@
 echo -n " --> bash_aliases_bk"
 export BASH_ALIASES_BK_SOURCED="yes"
 
+#From https://github.com/vikaskyadav/awesome-bash-alias
+alias .1="cd .."
+alias .2="cd ../.."
+alias .3="cd ../../.."
+alias .4="cd ../../../.."
+alias .5="cd ../../../../.."
+alias gw='git whatchanged'
+# \
+
 alias v='vim'
 alias vi='vim'
 alias rr='cd; clear;'
@@ -27,6 +36,7 @@ alias gbl='git branch'
 alias gb='git symbolic-ref --short HEAD'
 alias gn='git rev-list --count head'
 alias gpb='git push origin $(gb)'
+alias gpbf='git push origin $(gb) --force'
 alias gp='git pull'
 alias gfiles='git show --pretty="" --name-only' #shows files in last commit 
 alias devs='adb devices'

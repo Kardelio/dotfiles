@@ -1,3 +1,41 @@
+VIM German or French
+    :digraphs
+    CTRL + V then number 
+    252 = ü
+    246 = ö
+    235 = ë
+OR
+    CTRL + K then draw it like
+    CTRL + K e: = ë
+    CTRL + K u: = ü
+
+find command examples:
+find . -name "*.txt" -exec bash -c 'echo -e "\033[31m {} \033[0m this is a file"' \;
+
+https://www.howtogeek.com/427982/how-to-encrypt-and-decrypt-files-with-gpg-on-linux/
+    -gpg
+    - hwo to encrypt and decrupt with gpg
+    How to GPG
+gpg --list-keys
+     list all public keys in the chain
+gpg --output ~/mykey.key --armor --export ben.kadel@theverygroup.com
+    get your public ready for sharing
+gpg --encrypt --armor --sign -r ben.kadel@theverygroup.com <file>
+    encrypt the file with the receipient it is intended for
+gpg --decrypt <file>.asc > <outputfile>
+    - decrypt the encrypted file
+    - works with zip files too
+
+git stash save -u <message>
+    git stash save message and untracked items
+
+https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+    - pen test resources lots of commands
+    - priv esc
+
+sed -n 2p
+    prints specifically the 2nd line and the 2nd line only
+
 adb shell am set-debug-app -w --persistent uk.co.very.myvery
 adb shell am clear-debug-app uk.co.very.myvery 
     set the debugger to debug from start on app start
@@ -854,8 +892,41 @@ xargs
 echo "test test test " | lolcat -F 0.5
 	- enjoy the rainbow
 
-mysql -h localhost -u root
+start a mysql daemon with
+    mysqld
+then when its running connect with
+    mysql -h localhost -u root
+use these commands:
+    show databases;
+    use DB
+    show tables;
+use kill command to kill deamoon nicely after
 	- Mysql terminal
+alter table atom add COL_NAME COL_TYPE [not null default VAL]
+alter table atom drop COL_NAME
+update atom set COL_NAME = VAL where Email = 'balh'
+
+    Create a database
+CREATE DATABASE testdb;
+https://www.mysqltutorial.org/mysql-create-database/
+
+    Add a new MYSQL User
+CREATE USER 'newuser'@'%' IDENTIFIED BY 'user_password';
+    % - any machine
+    IP_ADD - from this ip address
+    localhost - this specific machine
+https://linuxize.com/post/how-to-create-mysql-user-accounts-and-grant-privileges/
+
+    Grant privilages to user...
+GRANT permission1, permission2 ON database_name.table_name TO 'database_user'@'localhost';
+GRANT ALL PRIVILEGES ON database_name.* TO 'database_user'@'localhost';
+https://linuxize.com/post/how-to-create-mysql-user-accounts-and-grant-privileges/
+
+    Change MYSQL User password
+ALTER USER 'user'@'hostname' IDENTIFIED BY 'newPass';
+https://www.cyberciti.biz/faq/mysql-change-user-password/
+
+
 
 sample='[{"name":"foo"},{"name":"bar"}]'
 echo "${sample}" | jq -c '.[]'
