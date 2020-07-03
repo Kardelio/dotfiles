@@ -3,7 +3,11 @@ Check if a view does NOT EXIST instead of just checking visibility
 
     check(doesNotExist())
 
-## git log placeholder string for format: git log --format=format:'%H'
+## Git log format string placeholders
+Use the below string placeholders in combination with git log's format ability
+
+    git log --format=format:'%H'
+
      %H: commit hash
      %h: abbreviated commit hash
      %T: tree hash
