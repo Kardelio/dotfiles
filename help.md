@@ -1,5 +1,5 @@
 ## espresso
-    check if a view does not exist instead of not visible
+Check if a view does NOT EXIST instead of just checking visibility
     check(doesNotExist())
 
 ## git log placeholder string for format: git log --format=format:'%H'
