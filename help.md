@@ -85,8 +85,10 @@ https://apple.stackexchange.com/questions/343110/terminal-how-to-use-at
 At command on mac is disabled by default, use the above page to enable it REQUIRES ROOT
 
 
-## git log master..branch --oneline | tail -1
-    -get first commit of branch after it branched away from its parent
+## Git branch commits
+Get the first commit of brach AFTER it was branched away from its parent
+    git log master..branch --oneline | tail -1
+
 
 ## useful android livedata
     val prompt: LiveData<PromoPrompt?> = promoRepository.getPromotionPromptData().asLiveData()
