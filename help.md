@@ -81,7 +81,9 @@ put this in local.properties to enable your android sdk to be found by gradle
 
 ## At command on Mac
 https://apple.stackexchange.com/questions/343110/terminal-how-to-use-at
+
 At command on mac is disabled by default, use the above page to enable it REQUIRES ROOT
+
 
 ## git log master..branch --oneline | tail -1
     -get first commit of branch after it branched away from its parent
