@@ -1,21 +1,28 @@
-Bens Dotfiles
-----
+# My Dotfiles
 
-# Install
+## Install
 To install my dotfiles simply run the install script 
 
-"""
+```
 cd dotfiles
 ./install
-"""
+```
 
-.bash_profile
-	Should be very small and point to .profile and .bashrc in that order
+The install file is a script that when run will download necessary dotfile dependencies and also set up certain important files as symlinks into your home directory.
 
-.profile
-	stuff not directly related to bash
-	PATH and friends, env variables
+## Files
 
-.bashrc
-	anything you want in an interactive command line,
-	prompt, editor, variable, aliases , functions
+### help.md
+A markdown file that i dump useful notes, info and commands into. I use this file as a reference to do help with all sorts of dev actions/activities.
+
+### .vimrc
+My Vimrc file for Vim, including config & plugins.
+
+### .bash_profile
+Should be very small and point to .profile and .bashrc in that order
+
+### .profile
+Stuff not directly related to bash PATH & env variables
+
+### .bashrc
+Anything you want in an interactive command line, prompt, editor, variable, aliases, functions

@@ -121,3 +121,5 @@ alias npmlist='npm list -g --depth 0'
 alias nm='./node_modules/nodemon/bin/nodemon.js app.js'
 alias randcomm='w3m whatthecommit.com | head -n 1'
 alias vids='cd /Users/ldev507/youtube/0_videos'
+alias ghwho="git config --get remote.origin.url | cut -d'/' -f4"
+alias ed="easy-dumpsys"

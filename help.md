@@ -1,3 +1,8 @@
+## Git get who owns the repo
+Terminal command to check which github account owns the repo
+
+    git config --get remote.origin.url | cut -d'/' -f4
+
 ## Espresso view does NOT exist
 Check if a view does NOT EXIST instead of just checking visibility
 
@@ -87,34 +92,50 @@ At command on mac is disabled by default, use the above page to enable it REQUIR
 
 ## Git branch commits
 Get the first commit of brach AFTER it was branched away from its parent
+
     git log master..branch --oneline | tail -1
 
 
-## useful android livedata
+## Useful Android LiveData example
+This is simply a useful line of code that can be used as an example in viewmodel classes when connecting VM livedata to repo livedata (and in this case flow)
+
     val prompt: LiveData<PromoPrompt?> = promoRepository.getPromotionPromptData().asLiveData()
 
-## adb shell am start -W -a android.intent.action.VIEW -d "myveryapp://promotion/abc" uk.co.very.myvery.dev
-    IMPORTANT
-    THis is the adb shell command to trigger intents to the android app
-    specifically the promo
 
-## firebase app distro
+## ADB Command to trigger apps with certain intents
+This line triggers the specified app (package) whilst firing the specific intent at it
+the intent in this case was cased for in the manifest file. This example triggers the 'promotion' intent
+
+    adb shell am start -W -a android.intent.action.VIEW -d "myveryapp://promotion/abc" uk.co.very.myvery.dev
+
+
+## Firebase App Distrubution specific fix
+Once FB Distro was looking in the wrong place for the apk, so I had to manually tell it, in the app/build.gradle within the FB settings where to look
+
     apkPath="FullOrRelPathToAPK"
-    this was the fix when firebase was looking in the wrong place
 
-## https://simianwesthighlandterrier.htmlpasta.com/
-    List of all vim tips
 
-## val prompt : LiveData<PromoPrompt?> = liveData<PromoPrompt?> {
-    val pp = PromoPrompt(title = "Discount stuff")
-    emit(null)
-}
-    hardcode livedata value ANDROID
+## Nice list of Vim Tips
+https://simianwesthighlandterrier.htmlpasta.com/
 
-## showfigfonts
-    command to show all the figlet fonts
 
-## gradle deamon control
+## Hard coded example of LiveData Android
+These lines of code are simple example of a hard coded livedata emitting data
+
+    val prompt : LiveData<PromoPrompt?> = liveData<PromoPrompt?> {
+        val pp = PromoPrompt(title = "Discount stuff")
+        emit(null)
+    }
+
+
+## Figlet fonts
+This command lets you see in the terminal all the fonts that figlet has installed
+
+    showfigfonts
+
+
+## Gradle Deamon Control
+These terminal commands 
     ./gradlew --status
         list running gradle daemons
     ./gradlew --stop

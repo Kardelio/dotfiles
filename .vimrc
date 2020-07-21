@@ -201,16 +201,18 @@ let maplocalleader = "-"
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
     Plug 'scrooloose/nerdtree'
-    "https://github.com/ycm-core/lsp-examples
-    "IMPORTANT install other language servers
     Plug 'valloric/youcompleteme'
     Plug 'ycm-core/lsp-examples'
     Plug 'udalov/kotlin-vim'
     Plug 'ap/vim-css-color'
+    Plug 'severin-lemaignan/vim-minimap'
     Plug 'dracula/vim'
     Plug 'tpope/vim-surround'
     Plug 'Kardelio/myvimplugin'
     call plug#end()
+
+    "https://github.com/ycm-core/lsp-examples
+    "IMPORTANT install other language servers
     
     "NOTE - For dev plugins use runtimepath
     "set runtimepath+=/Users/ldev507/git/benvimplugin.vim
@@ -219,7 +221,6 @@ let maplocalleader = "-"
     "Plug 'tpope/vim-commentary' 
     "Plug 'nicwest/vim-http'
     "Plug 'junegunn/vim-emoji'
-    "Plug 'severin-lemaignan/vim-minimap'
     "Plug 'junegunn/goyo.vim'
 "#}}}
 
@@ -252,7 +253,7 @@ let maplocalleader = "-"
     let g:airline_section_y = airline#section#create(['%b %B'])
 
     "NOTE - vim-minimap
-    let g:minimap_toggle='<leader>m'
+    "let g:minimap_toggle='<leader>m'
 
     "NOTE - fzf
     function! s:GotoOrOpen(command, ...)
@@ -306,6 +307,7 @@ let maplocalleader = "-"
     "#}}}
 
     "# Normal {{{
+        nnoremap yf :let @" = expand("%")<CR>
         nnoremap <leader>m i# ___ {{{<esc>o#}}}<esc>O<tab><esc>
         nnoremap £ i#
         nnoremap <leader>i :set cursorline!<CR>
