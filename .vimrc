@@ -157,7 +157,6 @@ let maplocalleader = "-"
     set showcmd
     set showmatch
     set incsearch
-    set tabstop=4
     set hlsearch
     set foldmethod=marker
     set modifiable
@@ -166,10 +165,16 @@ let maplocalleader = "-"
     set scrolloff=3
     set list
     set listchars=tab:>-,eol:$,space:·
+    "Below is the amount of characters to use for tabs
+    set tabstop=4
+    "Below turns tabs into spaces (uses tabstop to define num of spaces)
     set expandtab
     set nostartofline
     set backspace=indent,eol,start
     set clipboard=unnamed
+
+    "Ignore certain folders in vimgrep aka :grep
+    set wildignore+=app/build/**
 
     "sets the AG quickfix K window to open in new tab instead
     set switchbuf+=newtab
@@ -391,6 +396,7 @@ let maplocalleader = "-"
     au BufNewFile,BufRead Jenkinsfile setf groovy
     au BufNewFile,BufRead Fastfile setf ruby
     au BufRead *.quiz set fdm=marker
+    "au FileType xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
 
     "has - function to check if vim feature is enabled (vim --version)
     if has("autocmd")
@@ -412,12 +418,13 @@ let maplocalleader = "-"
     hi NEXT term=standout guifg=red guibg=green ctermbg=blue ctermfg=red
     hi IMPORTANT term=bold ctermbg=red ctermfg=white
     hi OPTIONAL term=bold ctermbg=green ctermfg=white
-    call matchadd('TODO','TODO')
-    call matchadd('NOTE','NOTE')
-    call matchadd('NEXT', 'NEXT')
-    call matchadd('IMPORTANT', 'IMPORTANT')
-    call matchadd('DELETE', 'DELETE')
-    call matchadd('OPTIONAL', 'OPTIONAL')
+    call matchadd('TODO','^.*TODO.*$')
+    call matchadd('NOTE','^.*NOTE.*$')
+    call matchadd('NEXT', '^.*NEXT.*$')
+    "call matchadd('NEXT', 'NEXT')
+    call matchadd('IMPORTANT', '^.*IMPORTANT.*$')
+    call matchadd('DELETE', '^.*DELETE.*$')
+    call matchadd('OPTIONAL', '^.*OPTIONAL.*$')
 
     "*cterm-colors*
     "NR-16   NR-8    COLOR NAME 
@@ -511,7 +518,22 @@ let maplocalleader = "-"
       set grepprg=ag\ --nogroup\ --nocolor
       " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
       let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+      "let g:ctrlp_user_command = 'ag %s --ignore="*/build/*" -l --nocolor -g ""'
       " ag is fast enough that CtrlP doesn't need to cache
       let g:ctrlp_use_caching = 0
     endif
+"#}}}
+
+"# Look at this stuff {{{
+    "function! ToggleComment(comment_char)
+    "    if getline(".") =~ "^" . a:comment_char
+    "        execute ".s/^" . a:comment_char . "//g"
+    "    else
+    "        execute ".s/^/" . a:comment_char . "/g"
+    "    endif
+    "endfunction
+
+    "autocmd FileType vim nnoremap <buffer> gc :call ToggleComment('"')<CR>
+    "autocmd FileType javascript,typescript nnoremap <buffer> gc :call ToggleComment("\\/\\/")<CR>
+    "autocmd FileType php,sh,zsh,bash,markdown nnoremap <buffer> gc :call ToggleComment("#")<CR>
 "#}}}

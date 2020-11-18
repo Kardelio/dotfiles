@@ -1,3 +1,285 @@
+
+## DnDBeyond Character Service
+
+https://character-service.dndbeyond.com/character/v3/character/{cheracterId}
+Akvari - 38892604
+Lyra - 38896484
+Scarboro - 38891649
+Thyrmir - 38896485
+
+info notes from the API
+
+data.classes[0].level
+data.classes[0].definition.name
+data.classes[0].definition.hitDice
+data.name
+
+data.race.baseRaceName
+.fullName
+
+data.background.definition.name
+
+
+data.classes[0].classFeatures[].definition.name
+data.classes[0].classFeatures[].definition.snippet
+
+data.modifiers{}.
+//background[], race[], class[], condition[], feat[], item[]
+race[]{}
+"Dexterity Score"
+id: 1608
+
+## Docker stuff
+
+List all running docker containers on the system
+    docker ps
+
+Copy a file to a docker containers
+    docker cp <file> <docker_iamge_id>:<path>
+
+reconnect to already running container
+    docker exec -it <container_id> /bin/bash
+
+alpine image uses apk instead of apt or pacman (package manager)
+
+    apk add gnupg
+
+## How to generate an SSH key for Bitbucket
+create an ssh key
+    ssh-keygen
+
+The above command has more options for security etc...e.g.
+    #Larger byte amount
+    ssh-keygen -t rsa -b 4096
+    #Password
+    ssh-keygen -p 
+
+From Bitbucket, choose Personal settings from your avatar in the lower left.
+Add the public version of the key
+most likely ```id_rsa.pub```
+
+Then set up your remote url to include the ssh version
+    git@bitbucket.org:/USER/REPO
+
+## NPM Http Server
+
+    npm install http-server -g
+    http-server
+
+## Terminal convert x image type to jpg
+
+        # install imagemagick
+        brew install imagemagick
+
+        # convert a single image
+        magick convert foo.HEIC foo.jpg
+
+        # bulk convert multiple images
+        magick mogrify -monitor -format jpg *.HEIC
+
+    return input.split("").reverse().join("");
+## ADB Screengrab in case i lose it
+
+    alias screengrab='adb exec-out screencap -p > ~/Desktop/Screens/screen-$(date +%s).png'
+
+## Git change default branch name
+Github now does this already after a recent update, if you create the first commit on github.
+As of v 2.28 the git terminal client (installable from git-scm.com) removes all the need for master naming.
+AND provides a initial-branch option for users to set.
+you can do this in many many ways...
+
+use init command with param
+    git init --initial-branch=main
+
+git aliases
+    git config --global alias.new 'init --initial-branch=main'
+    git config --global alias.ini '!git init && git symbolic-ref HEAD refs/heads/main'
+Problem with this is we cant overwrite git init using an alias...
+
+git config
+    git config --global init.defaultBranch main
+
+git function override
+    git() { 
+        if [[ $1 == "init" ]]; then 
+            command git "$@" --initial-branch=main
+        else 
+            command git "$@" 
+        fi
+    }
+
+## Node (JS) Reverse a string
+
+    return input.split("").reverse().join("");
+
+## Vim emojis
+Emoji List and Unicode Characters
+In insert mode do ctrl + v
+then type the code and hit ENTER
+
+Website with the list:
+https://unicode.org/emoji/charts/full-emoji-list.html
+
+😀 - U1F600
+😃 - U1F603
+😘 - U1F618
+😵 - U1F635
+💥 - U1F4A5
+💀 - U1F480
+✅ - U2705
+
+## Jenkins info
+jenkins downloads repos to this folder on the machine...
+
+    /Users/automation/.jenkins/workspace/_____@2/_____
+
+every workspace has 3 type
+normla - jenkins file
+@2 - the folder
+@tmp - rubbish
+
+## Vim close all tabs except for the current one
+
+    :tabon
+    (tabonly)
+
+## Tmux equally size panes
+CTRL + a ALT + 1 - horizontal (side by side)
+CTRL + a ALT + 2 - Vertical (ontop of one another)
+
+## Capture ALL keystrokes in a vim session
+use this flag when opening vim (-w {filename}) and it will write all keystokes to the file specificed
+
+    vim -w output
+
+## Material color picker stuff
+
+https://material.io/design/color/the-color-system.html#tools-for-picking-colors
+https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=df7408&secondary.color=0874df
+
+## Motionlayout helps videos and articles
+
+https://www.youtube.com/watch?v=TcKGOxsrxCM
+https://medium.com/@gilgoldzweig/how-to-perfect-android-animations-using-motionlayout-286cfa0f4f13
+
+## Git show specific commit with change
+git show just shows the commit info not the changes in the commit
+so use the -m flag to see that change in that specific commit
+
+    git show -m <commit_hash>
+
+## Some extra ben videos
+https://www.youtube.com/watch?v=kge6D5C_Kpc
+https://www.youtube.com/watch?v=78HHdCd-rfc
+https://www.youtube.com/watch?v=Jw_7e9styXw
+https://www.youtube.com/watch?v=rqlzObyfwQk
+https://www.youtube.com/watch?v=p1cpvAPDXYA
+https://www.bbc.co.uk/bitesize/articles/zv68cqt
+https://www.youtube.com/watch?v=Uwe24ssnqIM
+https://www.youtube.com/watch?v=A83Z_e0k3DU
+
+## Auto generate android app icons
+https://www.img-bak.in/
+
+## adb full dumpsys command
+adb shell dumpsys activity uk.co.very.myvery.dev
+
+## Vim remove lines that DONT contain a pattern
+use the g command to find patterns and perform actions on the line
+however use the band to invert the pattern search and effect lines
+not containing said pattern
+
+    :g!/^\s*"/d
+
+## Vim sort and uniq
+use the below command to sort and remove duplicates in a vim file
+
+    :sort u
+
+## preview a bitly link before clicking it
+Simply add a '+' to the end of the URL in the browser it will tell you the link it points to.
+e.g.
+
+    bit.ly/ABCDE+
+
+## Tmux reminder keys
+How to equally space tmux panes
+
+    CTRL + a , ALT + 1 = Equal space Horizontally
+    CTRL + a , ALT + 2 = Equal space Vertically
+
+## READ LIST
+https://developer.android.com/guide/components/fundamentals#Components
+
+## Mirror android device screen on mac
+https://github.com/Genymobile/scrcpy
+
+    brew install scrcpy
+
+## Enables live firebase analytics
+
+    #Start
+    adb shell setprop debug.firebase.analytics.app uk.co.very.myvery.dev
+    #Stop
+    adb shell setprop debug.firebase.analytics.app .none.
+
+On firebase
+click debugview
+debug device select it and hten enjoy the stream view
+
+## Quicktime screen recording video to gif
+https://gist.github.com/dergachev/4627207
+Requires:
+ffmpeg
+gifsicle
+
+    ffmpeg -i in.mov -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > out.gif
+
+Smoother version is this:
+
+    ffmpeg -i dang.mov -s 600x400 -pix_fmt rgb24 -f gif - | gifsicle --delay=5 > out.gif
+
+## install using adb
+
+    adb install <package>
+
+## View shared preferences of debug app
+Use the 3 lines below to open adb shell, then run as a specifci DEBUGGABLE package and then you can view the preferences in your app...
+https://stackoverflow.com/questions/1243079/how-to-examine-sharedpreferences-from-adb-shell
+
+    adb shell
+    run-as <app-package-id>
+    cat /data/data/<app-package-id>/shared_prefs/<app-package-id>.xml
+
+Use this to read out to a local file (add > file.txt at end)
+
+    adb exec-out run-as <package> cat /data/data/<package>/shared_prefs/<package>_preferences.xml
+
+Sed works to change the value:
+
+    sed -i "s/ONBOARDING_SHOWN\"\ value\=\"true\"/ONBOARDING_SHOWN\"\ value\=\"false\"/g" <package>_preferences.xml
+
+More adb commands USEFUL:
+https://gist.github.com/Pulimet/5013acf2cd5b28e55036c82c91bd56d8
+
+## PS command status options
+
+D Uninterruptible sleep (usually IO)
+R Running or runnable (on run queue)
+S Interruptible sleep (waiting for an event to complete)
+T Stopped, either by a job control signal or because it is being traced.
+W paging (not valid since the 2.6.xx kernel)
+X dead (should never be seen)
+Z Defunct ("zombie") process, terminated but not reaped by its parent.
+and the additional characters are:
+
+< high-priority (not nice to other users)
+N low-priority (nice to other users)
+L has pages locked into memory (for real-time and custom IO)
+s is a session leader
+l is multi-threaded (using CLONE_THREAD, like NPTL pthreads do)
++ is in the foreground process group 
+
 ## Git get who owns the repo
 Terminal command to check which github account owns the repo
 
@@ -103,8 +385,15 @@ This is simply a useful line of code that can be used as an example in viewmodel
 
 
 ## ADB Command to trigger apps with certain intents
+PUSH NOTE
 This line triggers the specified app (package) whilst firing the specific intent at it
 the intent in this case was cased for in the manifest file. This example triggers the 'promotion' intent
+
+Do NOT need to target package if links done correctly...
+
+    adb shell am start -W -a android.intent.action.VIEW -d "myveryapp://home"
+
+Otherwise...
 
     adb shell am start -W -a android.intent.action.VIEW -d "myveryapp://promotion/abc" uk.co.very.myvery.dev
 
@@ -151,7 +440,7 @@ These terminal commands
     convert audio file and all sorts of file to other specific file
     really useful and IMPORTANT
 
-## youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=jwD4AEVBL6Q
+## youtube-dl -x --audio-format mp3 https://www.youtube.com/watch?v=________
     download youtube video as mp3
 
 ## adb shell screenrecord /sdcard/vidx.mp4
@@ -235,10 +524,16 @@ These terminal commands
 ## find command examples:
 ## find . -name "*.txt" -exec bash -c 'echo -e "\033[31m {} \033[0m this is a file"' \;
 
+## gpg --full-gen-key
+    generate a new key pairing in gpg
 ## https://www.howtogeek.com/427982/how-to-encrypt-and-decrypt-files-with-gpg-on-linux/
     -gpg
     - hwo to encrypt and decrupt with gpg
     How to GPG
+## gpg --list-public-keys
+    List all of the public keys on this box
+## gpg --list-secret-keys
+    List all of the secret private  keys on this box
 ## gpg --list-keys
      list all public keys in the chain
 ## gpg --output ~/mykey.key --armor --export ben.kadel@theverygroup.com

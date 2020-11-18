@@ -25,16 +25,23 @@ alias .5="cd ../../../../.."
 alias gw='git whatchanged'
 # \
 
+# Really important, makes sure i use the 
+# Brew version of git and not the mac os default
+alias git='/usr/local/bin/git'
+# with version 2.28 you can change the initial branch name...
+# git init --initial-branch=main
+
 alias v='vim'
 alias vi='vim'
 alias rr='cd; clear;'
 alias l='ls'
-alias lss='ls -lath | head -n 10'
+alias lss='ls -lath | head -n 20'
 alias gs='git status'
 alias ga='git add .'
 alias gcom='git commit'
 alias gbl='git branch'
 alias gb='git symbolic-ref --short HEAD'
+alias gps='git branch --set-upstream-to=origin/$(gb) $(gb)'
 alias gn='git rev-list --count head'
 alias gpb='git push origin $(gb)'
 alias gpbf='git push origin $(gb) --force'
@@ -54,7 +61,9 @@ alias gitrepos='find ~ -name .git -type d -maxdepth 3'
 alias ss='source ~/.bash_profile'
 alias h='history'
 alias gl3_in_prog='git log --graph --abbrev-commit --decorate --format=format:"%C(bold blue)%h%C(reset) `git rev-list --count $(echo %h)` - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)" --all'
-alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+#alias gl="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) %C(white)%s%C(reset) %C(bold yellow)%d%C(reset)' --all"
+alias gl="git log --oneline --graph"
+alias gla="git log --graph --oneline --all"
 alias gl2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias lol="git log --oneline"
 alias host='servephp & chromlocal'
@@ -118,8 +127,10 @@ alias configProd='curl -H "Application:VERY" -H "Content-Type:application/json" 
 alias packs='adb shell pm list packages'
 alias dua='du -sh * | sort -h'
 alias npmlist='npm list -g --depth 0'
-alias nm='./node_modules/nodemon/bin/nodemon.js app.js'
+alias nm='/usr/local/bin/nodemon app.js'
 alias randcomm='w3m whatthecommit.com | head -n 1'
 alias vids='cd /Users/ldev507/youtube/0_videos'
 alias ghwho="git config --get remote.origin.url | cut -d'/' -f4"
+alias gt="git log --oneline --decorate --tags --no-walk"
 alias ed="easy-dumpsys"
+alias thissprint='git log --since="2 weeks ago" --oneline --format=format:"%C(blue)%an%C(reset) - %C(bold green)(%ar)%C(reset) - %C(white)%s%C(reset)"'
