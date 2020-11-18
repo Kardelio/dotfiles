@@ -45,6 +45,7 @@ if [[ "$host" != PC58* ]]; then #This if clause is only useful for myself to sto
 fi
 
 ln -sf $(realpath .vimrc) $HOME/.vimrc &> /dev/null && echo ".vimrc Successfully installed" || echo ".vimrc already installed" 
+mkdir "$HOME/swpfiles"
 ln -sf $(realpath .bash_aliases_bk) $HOME/.bash_aliases_bk &> /dev/null && echo ".bash_aliases_bk Successfully installed" || echo ".bash_aliases_bk already installed" 
 ln -sf $(realpath help.md) $HOME/help.md &> /dev/null && echo "help Successfully installed" || echo "help already installed" 
 
