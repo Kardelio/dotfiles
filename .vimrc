@@ -329,7 +329,8 @@ let maplocalleader = "-"
         "nnoremap dd "dY"_dd
         nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
         nnoremap / /\v
-        nnoremap <leader>x :bd<CR>
+        nnoremap <leader>x :exec '!'.getline('.')<CR>
+       " nnoremap <leader>x :bd<CR>
         nnoremap aa ggVG
         nnoremap <leader>a ggVG
         nnoremap <leader>n :call ToggleNumbers()<CR>

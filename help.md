@@ -1,3 +1,73 @@
+##
+
+DO NOT USE setupDialog for android BottomSheetDialogFragment
+INSTEAD use the oncreate and onViewCreated methods as usual##
+
+## Python
+
+    pip3 install virtualenv
+    virtualenv mypy
+    source mypy/bin/activate
+    which python
+    which pip
+    (pip install ...)
+    pip freeze --local > requirements.txt
+    deactivate
+    which python
+   
+to delete virtual env simply rm -rf folder
+
+on another env
+
+    pip install -r requirements.txt
+
+to install those previous packages
+
+    from file import class, orFunction
+    from package.module import class, orFunction
+
+## Use specific ssh key for git clone
+
+    ssh-agent bash -c 'ssh-add /somewhere/yourkey; git clone git@github.com:user/project.git'
+
+not tried this yet but: would be the config change to make git use specific ssh command and key
+    git config core.sshCommand "ssh -i ~/.ssh/id_rsa_example -F /dev/null"
+
+## Vim run line as command
+
+    :exec '!'.getline('.')
+
+## mitmproxy and curl
+
+for https
+* turn VPN off
+* start the mitmproxy
+* go to mitm.it
+* download and install the cert
+    mitm.it/cert/pem
+now https should work
+
+press 'f' to filter results 
+
+    curl --proxy http://127.0.0.1:8080 google.com
+    curl --proxy http://127.0.0.1:8080 https://google.com
+    curl -k --proxy http://127.0.0.1:8080 https://google.com
+    curl -k --proxy http://127.0.0.1:8080 https://www.google.com
+    curl -k --proxy http://127.0.0.1:8080 https://duckduckgo.com
+    curl -k --proxy http://127.0.0.1:8080 https://very.co.uk
+    curl -k --proxy http://127.0.0.1:8080 https://www.very.co.uk
+    curl -k --proxy http://127.0.0.1:8080 very.co.uk
+    curl -k --proxy http://127.0.0.1:8080 'https://www.very.co.uk/'   -H 'authority: www.very.co.uk'   -H 'pragma: no-cache'   -H 'cache-control: no-cache'   -H 'upgrade-insecure-requests: 1'   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'   -H 'sec-fetch-site: none'   -H 'sec-fetch-mode: navigate'   -H 'sec-fetch-user: ?1'   -H 'sec-fetch-dest: document'   -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8'
+    curl -k --proxy http://127.0.0.1:8080 'https://www.very.co.uk/'   -H 'authority: www.very.co.uk'   -H 'pragma: no-cache'   -H 'cache-control: no-cache'   -H 'upgrade-insecure-requests: 1'   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'   -H 'sec-fetch-site: none'   -H 'sec-fetch-mode: navigate'   -H 'sec-fetch-user: ?1'   -H 'sec-fetch-dest: document'   -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8'   -H 'test: 1234'
+
+BELOW is a working very curl using mitmproxy to intercept
+    curl -k --proxy http://127.0.0.1:8080 'https://www.very.co.uk/'   -H 'authority: www.very.co.uk'   -H 'pragma: no-cache'   -H 'cache-control: no-cache'   -H 'upgrade-insecure-requests: 1'   -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'   -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'   -H 'sec-fetch-site: none'   -H 'sec-fetch-mode: navigate'   -H 'sec-fetch-user: ?1'   -H 'sec-fetch-dest: document'   -H 'accept-language: en-GB,en-US;q=0.9,en;q=0.8'   -H 'test: 1234'
+
+## Proxy on android device
+
+    echo test
+    adb shell settings put global http_proxy 192.168.178.35:8080
+    adb shell settings put global http_proxy :0
 
 ## DnDBeyond Character Service
 
