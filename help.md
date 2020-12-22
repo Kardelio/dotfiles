@@ -1,3 +1,45 @@
+## Vim shuffle lines
+
+    visual mode select lines
+    cmd
+    !shuf<CR>
+
+## adb logcat clear
+
+    adb logcat -c
+
+clears the logcat log buffer
+
+## NerdTree yank file absolute path
+Simply put this fragment in the file
+~/.vim/plugged/nerdtree/nerdtre_plugin/yank_mapping.vim
+then use yy to copy the file selected into the clipboard
+
+    call NERDTreeAddKeyMap({
+                \ 'key': 'yy',
+                \ 'callback': 'NERDTreeYankCurrentNode',
+                \ 'quickhelpText': 'put full path of current node into the default register' })
+
+    function! NERDTreeYankCurrentNode()
+        let n = g:NERDTreeFileNode.GetSelected()
+        if n != {}
+            call setreg('+', n.path.str())
+        endif
+    endfunction
+
+## Vim view full file path
+
+    CTRL + g
+
+Shows in the bottom the file path
+
+## Imagemagick reduce file size
+
+    convert Snow_Forest_Random.png -quality 80 smll.jpg
+
+Also can work as a extension converter
+https://medium.com/@contactsunny/a-few-basic-but-powerful-imagemagick-commands-b5809b0a1076
+
 ##
 
 DO NOT USE setupDialog for android BottomSheetDialogFragment

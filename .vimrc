@@ -213,14 +213,14 @@ let maplocalleader = "-"
     Plug 'severin-lemaignan/vim-minimap'
     Plug 'dracula/vim'
     Plug 'tpope/vim-surround'
-    Plug 'Kardelio/myvimplugin'
+"    Plug 'Kardelio/myvimplugin'
     call plug#end()
 
     "https://github.com/ycm-core/lsp-examples
     "IMPORTANT install other language servers
     
     "NOTE - For dev plugins use runtimepath
-    "set runtimepath+=/Users/ldev507/git/benvimplugin.vim
+    set runtimepath+=/Users/ldev507/git/benvimplugin.vim
     
     "REMOVED - 
     "Plug 'tpope/vim-commentary' 
@@ -329,6 +329,7 @@ let maplocalleader = "-"
         "nnoremap dd "dY"_dd
         nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
         nnoremap / /\v
+        nnoremap L :Ag \b<C-R><C-W>\b<CR>
         nnoremap <leader>x :exec '!'.getline('.')<CR>
        " nnoremap <leader>x :bd<CR>
         nnoremap aa ggVG
