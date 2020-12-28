@@ -1,3 +1,8 @@
+## Git Koans
+Amazing
+
+    https://stevelosh.com/blog/2013/04/git-koans/
+
 ## Vim shuffle lines
 
     visual mode select lines
