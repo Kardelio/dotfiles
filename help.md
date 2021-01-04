@@ -1,3 +1,161 @@
+## Readlist
+
+    make android studio plugin with adb
+    https://proandroiddev.com/how-to-create-an-android-studio-plugin-with-the-adb-connection-and-reading-messages-from-the-logcat-1a021a752446
+
+    https://medium.com/androiddevelopers/now-in-android-30-5396897fa946
+
+    https://medium.com/androiddevelopers/migrating-from-dagger-to-hilt-is-it-worth-it-4cbbc8c93e33
+
+    https://medium.com/androiddevelopers/a-pragmatic-guide-to-hilt-with-kotlin-a76859c324a1
+
+    https://developer.android.com/kotlin/flow
+
+    https://developer.android.com/guide/fragments/create
+
+    https://www.youtube.com/watch?v=C2DBDZKkLss
+
+    https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-i-single-activities-e49fd3d202ab
+
+    https://github.com/JoseAlcerreca/android-lifecycles
+
+    https://developer.android.com/guide/components/activities/activity-lifecycle
+
+    https://blog.mindorks.com/android-activity-lifecycle
+
+## Avrae things
+
+    ---- Avrae
+    !test {{set_cc("Indomitable", 2)}}
+    !test {{set_cc("Second Wind", 0)}}
+    !test {{set_cc("Superiority Dice", 5)}}
+    !test {{set_cc("Action Surge", 1)}}
+    !attack Matalotok
+
+    !attack Matalotok adv
+
+    !attack Unarmed Strike
+
+    foresight
+    saves, checks, armour, attacks
+
+    !attack Morningstar
+
+    !attack Matalotok + 2d8 adv
+    !roll 2d8
+
+    !roll 1d20 + 10
+    !roll 1d8 + 4
+
+    --- Morningstar with Radiant Damage "holy weapon"
+    !attack Morningstar
+    !roll 2d8
+
+    !roll 1d12
+
+
+## Search for my note titles in Vim
+
+    \=.*\=\n\=.*\=\n\=.*\=
+
+## Inject JQuery
+
+    var jq = document.createElement('script');
+    jq.src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js";
+    document.getElementsByTagName('head')[0].appendChild(jq);
+
+## Grabbed links from notes
+    https://jsonplaceholder.typicode.com/todos
+    https://android.github.io/android-test/downloads/espresso-cheat-sheet-2.1.0.pdf
+    https://android.github.io/android-test/downloads/espresso-cheat-sheet-2.1.0.pdf
+    https://explainshell.com/
+    https://github.com/jlevy/the-art-of-command-line
+
+    https://gist.github.com/MohamedAlaa/2961058
+Droidcon
+    Rethinking UI: Imperative to Declarative
+    https://www.droidcon.com/media-detail?video=469742501
+
+    Practical Android CI/CD with GitHub Actions and Kotlin script
+    https://www.droidcon.com/media-detail?video=470095134
+
+    ✅ Compose for existing apps
+    https://www.droidcon.com/media-detail?video=470160896
+
+    ✅Testing Compose
+    https://www.droidcon.com/media-detail?video=470197337
+
+    Write smarter code with Sealed Classes and Lambdas in Kotlin
+    https://www.droidcon.com/media-detail?video=470184554
+
+    Using Hilt in a multi module project
+    https://www.droidcon.com/media-detail?video=470204128
+
+    Writing performant layouts
+    https://www.droidcon.com/media-detail?video=470229132
+
+    Sharing my preference for DataStore
+    https://www.droidcon.com/media-detail?video=470505163
+
+    Boosting Productivity with Android Studio Plugin
+    https://www.droidcon.com/media-detail?video=470507684
+
+    Modern App Distribution on Google Play
+    https://www.droidcon.com/media-detail?video=470575794
+
+    Android Shell Like a Jedi
+    https://www.droidcon.com/media-detail?video=470575894
+
+    Become a Composer
+    https://www.droidcon.com/media-detail?video=470614432
+
+    The way to modularization
+    https://www.droidcon.com/media-detail?video=470608124
+
+## TOTALLY FREE WEBSITE:
+https://infinityfree.net/
+
+## From Work Help
+Copied and Pasted
+    ./gradlew connectedVeryDebugAndroidTest
+    ./gradlew testVeryDebugUnitTest
+        - Run unit tests from term and android tests from term
+
+    docker run --name bob -t -i -v /Users/ldev507/delMe:/tmp alpine
+        - run interactive docker container called bob 
+        - that has the dir delMe mounted into tmp
+
+    adb shell am start -n uk.co.very.myvery.dev/com.shopdirect.cui.CUIActivity
+        - start activity from cmd
+
+    adb shell 'pm list packages -f' | grep very
+         - list all apps on devices and greps for very ofcourse
+
+    adb logcat "com.shopdirect.mylittlewoods.test:*" "*:E"
+        - logcat all errors for this package
+
+    adb shell am start -a android.intent.action.VIEW     -c android.intent.category.BROWSABLE     -d "myveryapp://basket.page"
+        - fire intents using adb
+
+    ssh -i "~/.ssh/ec2Keypar.pem" host@instance.eu-west-1.compute.amazonaws.com
+        - AWS INstance that is hosting phpmyadmin
+
+    qemu-system-x86_64 -cdrom ubuntu-16.04.3-server-amd64.iso -m 1024 -hda ub3.img
+        - start my virtual machine in /Documents/virt/
+    qemu-img create ub3.img 5120M
+        - create a fake hard drive for a virtual machine
+        - WARNING: Memory size matters check distro requirements
+
+    mysqldump -h localhost -u root testdb views > viewsTable.sql
+        - get a full sql dump from specific table called views in db testdb
+
+    ssh -i key.pem user@34.253.67.182
+    ssh -i key.pem user@34.253.67.182
+        - ssh onto git server
+
+    adb shell am start -a android.intent.action.VIEW -d “myveryapp://shop/basket.page”
+        - adb tests with a link
+
 ## Git Koans
 Amazing
 
