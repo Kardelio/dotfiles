@@ -1,3 +1,9 @@
+## find opposite
+Find directories that do NOT contain a specific file
+for example find directories taht dont contain a .git folder
+
+    find . -maxdepth 1 -type d '!' -exec test -e "{}/.git" ';' -print
+
 ## Rsync
 cp but with progress information
 
