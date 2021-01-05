@@ -1,3 +1,8 @@
+## Rsync
+cp but with progress information
+
+    rsync --progress --recursive /path/to/folder /location
+
 ## Readlist
 
     make android studio plugin with adb
