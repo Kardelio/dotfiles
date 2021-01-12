@@ -157,6 +157,8 @@ let maplocalleader = "-"
     set showcmd
     set showmatch
     set incsearch
+    set colorcolumn=80
+    "set signcolumn=yes NOTE: adds gutter column
     set hlsearch
     set foldmethod=marker
     set modifiable
