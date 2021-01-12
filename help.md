@@ -1,3 +1,7 @@
+## Vim Options
+In vim type this in to command mode
+    :options
+
 ## find opposite
 Find directories that do NOT contain a specific file
 for example find directories taht dont contain a .git folder

@@ -413,6 +413,13 @@ let maplocalleader = "-"
 
 "# Highlights {{{
     hi CursorLine ctermbg=darkblue ctermfg=white
+    "hi Cursor ctermfg=black ctermbg=white
+    "hi iCursor ctermfg=black ctermbg=red
+    "set guicursor=n-v-c:block-Cursor
+    "set guicursor+=i:ver100-iCursor
+    "set guicursor+=n-v-c:blinkon0
+    "set guicursor+=i:blinkwait10
+
     hi Search term=standout guibg=red guifg=red ctermbg=Magenta ctermfg=white
     hi DELETE term=standout guibg=white guifg=red ctermbg=white ctermfg=red
     hi TODO term=standout guifg=blue guibg=white ctermbg=blue ctermfg=white
