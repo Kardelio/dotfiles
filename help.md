@@ -1,3 +1,76 @@
+## Git count number of commits on a branch
+
+Perform on said branch and the 'develop' should be the branch you branched away from
+
+    git rev-list --count HEAD ^develop
+
+## lint
+
+    ./gradlew :presentation:ktlint
+
+## Unix apply patch file
+
+generate a patch file
+    Git or Diff
+
+Apply a file
+    patch < patch.file
+
+https://www.cyberciti.biz/faq/appy-patch-file-using-patch-command/
+
+## Git show which commit a tag points to
+
+    git rev-list -n 1 $TAG
+
+## Parse JSON with quot; from android shared prefs
+
+    let a = "JSON_FROM_PREFS"
+
+    JSON.parse(a.replace(/&quot;/g,'"'));
+
+## Print out folders using ls
+Print out just folders using ls
+
+    ls -ld -- */
+
+
+## SQLite
+
+    sqlite3
+    
+    .open file_name.sqlite
+
+    .databases
+
+    .tables
+
+    SELECT * from table_name
+
+## SSH Folder
+
+    .ssh/config
+
+Contains info for example which ssh key to use when connecxting to what ip 
+
+    Host 123.345.456.3
+        IdentityFile ~/.ssh/my_key
+
+Also: The known_hosts file is for verifying the identity of other systems.
+
+    known_hosts
+
+And: The authorized_keys file in SSH specifies the SSH keys that can be used for logging into the user account for which the file is configured.
+
+    authorized_keys
+
+## JS Base64 encoding and decoding
+
+    var str = "Hello World!";
+    var enc = window.btoa(str);
+    var dec = window.atob(enc);
+
+    var res = "Encoded String: " + enc + "<br>" + "Decoded String: " + dec;`
+
 ## Python microphone and speech recognition
 
 https://medium.com/towards-artificial-intelligence/creating-a-voice-recognition-application-with-python-57d8c3e55256
@@ -18,6 +91,9 @@ cp but with progress information
     rsync --progress --recursive /path/to/folder /location
 
 ## Readlist
+
+#### Useful read about viewmodelprovider
+    https://medium.com/koderlabs/viewmodel-with-viewmodelprovider-factory-the-creator-of-viewmodel-8fabfec1aa4f
 
     make android studio plugin with adb
     https://proandroiddev.com/how-to-create-an-android-studio-plugin-with-the-adb-connection-and-reading-messages-from-the-logcat-1a021a752446
@@ -440,6 +516,16 @@ normla - jenkins file
 ## Tmux equally size panes
 CTRL + a ALT + 1 - horizontal (side by side)
 CTRL + a ALT + 2 - Vertical (ontop of one another)
+
+Vertically
+
+select-layout even-vertical
+Usually assigned to: Ctrl+b, Alt+2
+
+Horizontally
+
+select-layout even-horizontal
+Usually assigned to: Ctrl+b, Alt+1
 
 ## Capture ALL keystrokes in a vim session
 use this flag when opening vim (-w {filename}) and it will write all keystokes to the file specificed
@@ -1369,12 +1455,20 @@ These terminal commands
 
 ## git squash !!! VERY IMPORTANT
 	- git squashing is done as follows
-## git rebase -i HEAD~n
-## e.g. git rebase -i HEAD~3  = = squash last 3 commits (can also use a hash)
-## then in editor keep the top (oldest) one to be pick and edit the others to be squash
-## save and close then the second editor appreance will ask about the commit message
-## use the provided space to delete the combined messages and your own (otpional)
-	- git rebase -i HEAD~3
+     git rebase -i HEAD~n
+     e.g. git rebase -i HEAD~3  = = squash last 3 commits (can also use a hash)
+     then in editor keep the top (oldest) one to be pick and edit the others to be squash
+     save and close then the second editor appreance will ask about the commit message
+     use the provided space to delete the combined messages and your own (otpional)
+        - git rebase -i HEAD~3
+
+    EXTRA
+    use gnb to find number of commits on branch
+    then use git rebase -i HEAD~x with the number from the previous command
+    oldest commit at top
+    newest at bottom
+    Oldest should stay as pick
+    All others to bottom should change to s or squash
 
 ## Bash string manipulation cheatsheet
 ## Assignment

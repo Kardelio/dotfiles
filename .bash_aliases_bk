@@ -13,7 +13,7 @@
 # Python
 # Gradle
 
-echo -n " --> bash_aliases_bk"
+#echo -n " --> bash_aliases_bk"
 export BASH_ALIASES_BK_SOURCED="yes"
 
 #From https://github.com/vikaskyadav/awesome-bash-alias
@@ -43,6 +43,7 @@ alias gbl='git branch'
 alias gb='git symbolic-ref --short HEAD'
 alias gps='git branch --set-upstream-to=origin/$(gb) $(gb)'
 alias gn='git rev-list --count head'
+alias gnb='git rev-list --count HEAD ^develop'
 alias gpb='git push origin $(gb)'
 alias gpbf='git push origin $(gb) --force'
 alias gp='git pull'
@@ -127,10 +128,95 @@ alias configProd='curl -H "Application:VERY" -H "Content-Type:application/json" 
 alias packs='adb shell pm list packages'
 alias dua='du -sh * | sort -h'
 alias npmlist='npm list -g --depth 0'
-alias nm='/usr/local/bin/nodemon app.js'
+alias nm='/Users/bkadel/.npm-global/bin/nodemon app.js'
+#alias nm='/usr/local/bin/nodemon app.js'
 alias randcomm='w3m whatthecommit.com | head -n 1'
-alias vids='cd /Users/ldev507/youtube/0_videos'
+alias vids='cd /Users/bkadel/youtube/0_videos'
 alias ghwho="git config --get remote.origin.url | cut -d'/' -f4"
 alias gt="git log --oneline --decorate --tags --no-walk"
 alias ed="easy-dumpsys"
 alias thissprint='git log --since="2 weeks ago" --oneline --format=format:"%C(blue)%an%C(reset) - %C(bold green)(%ar)%C(reset) - %C(white)%s%C(reset)"'
+
+#From Old WOrk
+#        _ _                                          _
+#   __ _| (_) __ _ ___  ___  ___  __      _____  _ __| | __
+#  / _` | | |/ _` / __|/ _ \/ __| \ \ /\ / / _ \| '__| |/ /
+# | (_| | | | (_| \__ \  __/\__ \  \ V  V / (_) | |  |   <
+#(_)__,_|_|_|\__,_|___/\___||___/___\_/\_/ \___/|_|  |_|\_\
+#                              |_____|
+
+alias dumpStack="adb shell dumpsys activity activities | sed -En -e '/Stack #/p' -e '/Running activities/,/Run #0/p' | grep 'uk.co.very\|littlewoods'"
+alias appDeployLittlewoodsTest='./gradlew assembleLittlewoodsSprintTest app:crashlyticsUploadDistributionLittlewoodsSprintTest'
+alias appDeployVeryTest='./gradlew assembleVerySprintTest app:crashlyticsUploadDistributionVerySprintTest'
+alias appBundleVeryReleaseToStore='./gradlew deployVeryReleaseBundleToInternal'
+alias appDeployVeryRelease='./gradlew assembleVeryRelease app:crashlyticsUploadDistributionVeryRelease'
+alias deployVeryRelease_USE_THIS_ONE='./gradlew deployVerySprintTestToCrashlytics && ./gradlew deployVeryReleaseBundleToInternal'
+alias babbeld='./gradlew assembleCoreDebug && ./gradlew installCoreDebug && adb shell am start -n com.babbel.mobile.android.en/com.babbel.mobile.android.core.presentation.mainactivity.screens.MainActivity'
+alias babbelprefs='adb exec-out run-as com.babbel.mobile.android.en cat /data/data/com.babbel.mobile.android.en/shared_prefs/com.babbel.mobile.android.en.sharedprefs.xml
+'
+alias veryd='./gradlew assembleVeryDebug && ./gradlew installVeryDebug && adb shell am start -n uk.co.very.myvery.dev/com.shopdirect.devconfig.DevConfigActivity'
+alias littlewoodsd='./gradlew assembleLittlewoodsDebug && ./gradlew installLittlewoodsDebug && adb shell am start -n com.shopdirect.mylittlewoods.dev/com.shopdirect.devconfig.DevConfigActivity'
+#alias veryst='./gradlew assembleVerySprintTest && ./gradlew installVerySprintTest && adb shell am start -n uk.co.very.myvery.test/com.shopdirect.ami.AMIActivity'
+alias veryp='./gradlew assembleVeryRelease && ./gradlew installVeryRelease'
+alias fragmentTransactions="adb shell dumpsys activity uk.co.very.myvery.dev | grep 'ADD\|REMOVE'"
+alias frags="adb shell dumpsys activity uk.co.very.myvery.dev | grep 'Active Fragments' -A 1 | grep 'Active Fragments' -v && adb shell dumpsys activity uk.co.very.myvery.dev | grep 'ADD'"
+alias dump="adb shell dumpsys activity com.babbel.mobile.android.en"
+alias fragsTest="adb shell dumpsys activity uk.co.very.myvery.test | grep 'Active Fragments' -A 1 | grep 'Active Fragments' -v && adb shell dumpsys activity uk.co.very.myvery.dev | grep 'ADD'"
+alias work="cd ~/git/core.android"
+alias scrn="cd ~/git/atom"
+alias web="cd ~/Documents/else"
+alias connect='ssh -i key.pem bktest@34.253.67.182'
+alias db='mysql -h localhost -u root'
+alias vm='qemu-system-x86_64 -cdrom ~/Documents/virt/ubuntu-16.04.3-server-amd64.iso -m 1024 -hda ~/Documents/virt/ub3.img'
+alias com='ls ~/ben_scripts'
+alias ub='ssh -i "~/.ssh/ec2Keypar.pem" ubuntu@ec2-54-194-81-6.eu-west-1.compute.amazonaws.com'
+alias plum='ssh -p 21098  plumhqba@plum-tree-cottage.com'
+alias a1='ssh pi@192.168.6.87'
+alias a2='ssh pi@192.168.23.92'
+alias a3='ssh pi@192.168.16.240'
+alias a4='ssh pi@192.168.20.151'
+alias jenkv='ssh automation@192.168.28.75'
+alias jenkl='ssh automation@192.168.3.150'
+alias isn='isNetworkUp'
+#alias logE='adb logcat "uk.co.very.myvery.dev:*" "*:E"'
+#alias logD='adb logcat "uk.co.very.myvery.dev:*" "*:D"'
+alias logE='adb logcat "com.babbel.mobile.android.en:*" "*:E"'
+alias logD='adb logcat "com.babbel.mobile.android.en:*" "*:D"'
+alias spa='cd ~/social-proof-api'
+alias pixs='cd ~/git/pixel-safe'
+alias ter='terminalizer'
+alias t='todo'
+alias gh='~/git/checkoutmon/githistory'
+alias tkt='node ~/ben_scripts/tkt.js'
+alias tkts='node ~/ben_scripts/tkts.js'
+alias getMyTickets='node ~/ben_scripts/tkt.js'
+alias worktr1='tree ~/Documents/bitbucket/myvery_android/app/src/main/java/com/shopdirect/ -L 1'
+alias dwork="cd ~/Documents/bitbucket/myvery_android/app/src/main/java/com/shopdirect"
+alias where=". /Users/ldev507/git/where/where"
+alias rr="cd; clear; tt;"
+alias dots="cd ~/git/dotfiles"
+alias originalCommit='git log develop..BRANCH --oneline | tail -1'
+alias cal='khal'
+alias n='vim "+ normal Gzz" ~/notes'
+#BELOW old start vim in insert mode and at bottom of page
+#alias n='vim "+ normal Gzzo" +startinsert ~/notes'
+alias g='cd ~/git'
+#alias pres="vim -c 'norm zM' ~/Desktop/Slides/myLifeInTheTerminal"
+alias pres="vim ~/Desktop/Slides/insideTheGitFolder"
+alias pp="tmux a -t pres"
+alias bb="tmux a -t ben_tmux"
+alias q="cat ~/q | grep $1"
+#OLD WAY#alias logH='adb logcat "uk.co.very.myvery.test:*" | grep OkHttp'
+alias logH='adb logcat "uk.co.very.myvery.dev:*" -s "OkHttp"'
+alias logW='adb logcat "uk.co.very.myvery.dev:*" -s "SDG_WEBVIEW"'
+alias logBK='adb logcat "uk.co.very.myvery.dev:*" -s "BK"'
+#alias logBK='adb logcat "uk.co.very.myvery.dev:*" -s "BK"'
+alias logBK='adb logcat "com.babbel.mobile.android.en:*" -s "BK"'
+alias docky='docker run -it -v kitty:/shebang bash'
+alias alpine='docker run -it -v alpinevol:/myvolume alpwithgit'
+alias editMessage='vim scp://pi@192.168.6.87//home/pi/ami-monitor/data/message.txt'
+#alias atom='ssh pi@192.168.23.92 -i ~/atomkey'
+alias sc="cd $HOME/git/atom && atomScripts/switchConfig "
+alias diff='colordiff'
+alias debugon='adb shell am set-debug-app -w --persistent uk.co.very.myvery.dev'
+alias debugoff='adb shell am clear-debug-app uk.co.very.myvery.dev'

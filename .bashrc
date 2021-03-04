@@ -5,13 +5,13 @@
 #(_)_.__/ \__,_|___/_| |_|_|  \___|
 # 
 
-echo -n " --> bashrc"
+#echo -n " --> bashrc"
 export BASH_RC_SOURCED="yes"
 export EDITOR=vim
 export LSCOLORS=heHfcxdxhbegedabagacad  
 export PROMPT_COMMAND="insult update_terminal_cwd"
 
-alias tmux="TERM=screen-256color-bce tmux"
+#alias tmux="TERM=screen-256color-bce tmux"
 alias transfer=transfer
 
 # Super vital below for colorized terminal output between Mac and Linux
@@ -183,7 +183,8 @@ transfer() {
 
 if [[ -z "$TMUX" ]] && [[ "$TERM_PROGRAM" != "vscode" ]]; then
 	#Not running in a tmux session or in a vscode terminal
-	echo "Do normal terminal scripts here..." > /dev/null
+    echo ""
+	#echo "Do normal terminal scripts here..." > /dev/null
 fi
 if [ -n "$TMUX" ]; then
 	echo -e "\033[37;44m Running inside of TMUX, Enjoy! \033[0m"
@@ -201,6 +202,10 @@ fi
 #	fi
 #}
 
-echo "$SHELL - $TERM"
+#echo "$SHELL - $TERM"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND='ag --hidden -u --path-to-ignore ~/.gitignore --ignore .git -g ""'
+
+#Work based exports below
+[ -f ~/.bash_babbel_env ] && source ~/.bash_babbel_env

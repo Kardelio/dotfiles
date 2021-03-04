@@ -222,7 +222,7 @@ let maplocalleader = "-"
     "IMPORTANT install other language servers
     
     "NOTE - For dev plugins use runtimepath
-    set runtimepath+=/Users/ldev507/git/benvimplugin.vim
+    set runtimepath+=/Users/bkadel/git/benvimplugin.vim
     
     "REMOVED - 
     "Plug 'tpope/vim-commentary' 
@@ -283,6 +283,8 @@ let maplocalleader = "-"
       \ call fzf#run(fzf#vim#with_preview({'source': 'find . -not -path "*/\.*" -type f', 'right': '50%', 'window': '30split'})) 
     command! -bang -nargs=* FullFzf
       \ call fzf#vim#files(<q-args>,fzf#vim#with_preview('right:50%'))
+    "command! -bang -nargs=* FullFzf
+    "  \ call fzf#vim#files(<q-args>,fzf#vim#with_preview('right:50%'))
     let g:fzf_colors =
       \ { 'fg':      ['fg', 'Normal'],
       \ 'bg':      ['bg', 'Normal'],
@@ -331,7 +333,8 @@ let maplocalleader = "-"
         "nnoremap dd "dY"_dd
         nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
         nnoremap / /\v
-        nnoremap L :Ag \b<C-R><C-W>\b<CR>
+        nnoremap <C-f> :Ag \b<C-R><C-W>\b<CR>
+        "nnoremap L :Ag \b<C-R><C-W>\b<CR>
         nnoremap <leader>x :exec '!'.getline('.')<CR>
        " nnoremap <leader>x :bd<CR>
         nnoremap aa ggVG
